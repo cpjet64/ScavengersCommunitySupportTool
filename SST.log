@@ -11,10 +11,9 @@ Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz          3701 LGA1151           Genuine
 
 
 
-Name                      CurrentHorizontalResolution CurrentVerticalResolution CurrentRefreshRate AdapterRamGB DriverD
-                                                                                                                ate    
-----                      --------------------------- ------------------------- ------------------ ------------ -------
-NVIDIA GeForce GTX 980 Ti                        3840                      2160                 59            4 4/22...
+Name                      CurrentHorizontalResolution CurrentVerticalResolution CurrentRefreshRate AdapterRamGB DriverDate           DriverVersion
+----                      --------------------------- ------------------------- ------------------ ------------ ----------           -------------
+NVIDIA GeForce GTX 980 Ti                        3840                      2160                 59            4 4/22/2021 8:00:00 PM 27.21.14.6627
 
 
 
