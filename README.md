@@ -2,6 +2,8 @@
 
 Download the latest release from https://github.com/cpjet64/ScavengersUE4SupportTool/releases
 
+For the technically challenged or those who want to listen to my explanations of what is happening while the tool is running I just made a video tutorial walking you through all of the steps described below. https://youtu.be/7aJpkKAGPYc
+
 To use this tool, save all files DIRECTLY into your Downloads folder. 
 Right click the STTScripts.ps1, click Properties, and check off "Unblock" as shown below, then click Apply. 
 Repeat the unblock for the ScavengersSupportTool.bat file. 
