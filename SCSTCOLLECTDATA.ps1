@@ -33,7 +33,7 @@ $PSTitle = "Scavengers Community Support Tool Data Only"
 
 $host.UI.RawUI.WindowTitle = $PSTitle
 
-$scstlog = "$env:USERPROFILE\Downloads\SCSTInfo.log"
+$scstlog = "SCSTInfo.log"
 
 ##
 #END VARIABLES
