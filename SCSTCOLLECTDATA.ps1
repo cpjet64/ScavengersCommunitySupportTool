@@ -30,15 +30,7 @@ $PSTitle = "Scavengers Community Support Tool Data Only"
 
 $host.UI.RawUI.WindowTitle = $PSTitle
 
-$userdownloads = "$env:USERPROFILE\Downloads"
-
-if (Test-Path $scstlog) {
-  }
-  else {
-    New-Item "$userdownloads\SCSTInfo.log"
-  }
-
-$scstlog = "$userdownloads\SCSTInfo.log"
+$scstlog = "$env:USERPROFILE\Downloads\SCSTInfo.log"
 
 ##
 #END VARIABLES
