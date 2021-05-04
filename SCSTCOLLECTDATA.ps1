@@ -1,5 +1,8 @@
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
+#set location to script path
+Set-Location (Split-Path -Parent $MyInvocation.MyCommand.Path)
+
 ###
 #BEGIN SELF ELEVATE TO ADMIN
 ###
