@@ -1,23 +1,6 @@
 # Run a Powershell script that isnt signed ONCE and ONLY DURING THIS SESSION
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
-###
-#BEGIN SELF ELEVATE TO ADMIN
-###
-
-# Self-elevate the script if not already running as administrator
-if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
- if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-  $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-  Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
-  Exit
- }
-}
-
-###
-#END SELF ELEVATE TO ADMIN
-###
-
 # Set location to script path
 Set-Location (Split-Path -Parent $MyInvocation.MyCommand.Path)
 
@@ -67,3 +50,5 @@ Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID, @{
 ##
 #END HOUSEKEEPING
 ##
+
+$host.UI.RawUI.ReadKey();
