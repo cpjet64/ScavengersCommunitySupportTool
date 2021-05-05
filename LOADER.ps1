@@ -1,14 +1,48 @@
-$RepairToolButton_Click = {
-	$RepairToolButton.Enabled = $false
-	repairtool
+$Label2_Click = {
 }
-$DataCollectorButton_Click = {
-	$DataCollectorButton.Enabled = $false
-	datacollector
+$Label1_Click = {
+}
+$UnofficialToolLabel_Click = {
+}
+$PleaseWaitLabel_Click = {
+}
+$VersionLabel_Click = {
+}
+$AboutMeLabel_Click = {
 }
 $LauncherWindow_Load = {
 }
-
+$CloseButton_Click = {
+	$LauncherWindow.Close()
+}
+$DataCollectorButton_Click = {
+	usernameinput
+	$CloseButton.Enabled = $false
+	$DataCollectorButton.Enabled = $false
+	$RepairToolButton.Enabled = $false
+	$PleaseWaitLabel.Visible = $true
+	start-Sleep 1
+	datacollector -wait
+	start-Sleep 1
+	$PleaseWaitLabel.Visible = $false
+	$CloseButton.Enabled = $true
+	$RepairToolButton.Enabled = $true
+	$DataCollectorButton.Enabled = $true
+}
+$RepairToolButton_Click = {
+	usernameinput
+	$CloseButton.Enabled = $false
+	$DataCollectorButton.Enabled = $false
+	$RepairToolButton.Enabled = $false
+	$PleaseWaitLabel.Visible = $true
+	start-Sleep 1
+	repairtool -wait
+	start-Sleep 1
+	$PleaseWaitLabel.Visible = $false
+	$CloseButton.Enabled = $true
+	$RepairToolButton.Enabled = $true
+	$DataCollectorButton.Enabled = $true
+}
 $AcceptCheckbox_CheckedChanged = {
 	if ($AcceptCheckBox.Checked) { $DataCollectorButton.Visible = $true }
 	else { $DataCollectorButton.Visible = $false }
@@ -17,11 +51,11 @@ $AcceptCheckbox_CheckedChanged = {
 }
 
 function repairtool {
-(& ".\SCST.ps1")
+(& ".\SCSTRepair.ps1")
 }
 
 function datacollector {
-(& ".\SCSTCOLLECTDATA.ps1")
+(& ".\SCSTInfo.ps1")
 }
 
 Add-Type -AssemblyName System.Windows.Forms
@@ -29,3 +63,15 @@ Add-Type -AssemblyName System.Windows.Forms
 $LauncherWindow.ShowDialog()
 
 
+function usernameinput {
+([void][Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic'))
+$msg   = 'Please Enter Your Discord Username'
+$discordusernameentry = [Microsoft.VisualBasic.Interaction]::InputBox($discordusernameentry)
+if (Test-Path $env:TEMP\SCSTDiscord.txt) {
+    Set-Content -Path "$env:TEMP\SCSTDiscord.txt" -Value "$discordusernameentry" -Encoding UTF8
+}
+else {
+    New-Item "$env:TEMP\SCSTDiscord.txt"
+	Set-Content -Path "$env:TEMP\SCSTDiscord.txt" -Value "$discordusernameentry" -Encoding UTF8
+}
+}

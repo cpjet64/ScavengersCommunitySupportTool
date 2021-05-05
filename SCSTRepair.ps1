@@ -34,19 +34,29 @@ Remove-Item -Path "$destinationdirectx"
 Remove-Item -Path "$env:TEMP\DirectXInstaller" -Recurse
 Remove-Item -Path "$destinationvcredisx86"
 Remove-Item -Path "$destinationvcredisx64"
-if (Test-Path $env:TEMP\SCST.log) {
-    Remove-Item -Path "$env:TEMP\SCST.log"
+if (Test-Path $env:TEMP\SCSTRepair.log) {
+    Remove-Item -Path "$env:TEMP\SCSTRepair.log"
 }
 else {
-    New-Item "$env:TEMP\SCST.log"
+    New-Item "$env:TEMP\SCSTRepair.log"
 }
-$scstlog = "$env:TEMP\SCST.log"
+$scstlog = "$env:TEMP\SCSTRepair.log"
 Add-Content -Path "$scstlog" -Value "`r`nSFC LOG BEGINS HERE" -Encoding utf8
 $sr = Get-Content c:\windows\Logs\CBS\CBS.log | Where-Object {$_.Contains("[SR]")} | Select-object -Property @{Name="LastCheckDate"; Expression = {$_.substring(0,10)}} -last 1
 Get-Content c:\windows\Logs\CBS\CBS.log | where-object {$_.Contains("[SR]") -and $_.Contains($sr.lastcheckdate)} | Select-String -notmatch "Verify complete","Verifying","Beginning Verify and Repair" | Out-File -FilePath "$scstlog" -Encoding utf8 -Append
 Add-Content -Path "$scstlog" -Value "`r`nDISM LOG BEGINS HERE" -Encoding UTF8
-Add-Content -Path "$scstlog" -Value "$env:TEMP\SCST-DISM.log" -Encoding UTF8
+$getdismlog = Get-Content -Path "$env:TEMP\SCST-DISM.log"
+Add-Content -Path "$scstlog" -Value "$getdismlog" -Encoding UTF8
 Remove-Item -Path "$env:TEMP\SCST-DISM.log"
+$discordusernameentrysend = Get-Content -Path "$env:TEMP\SCSTDiscord.txt"
+$Uri = 'https://discord.com/api/webhooks/838597970369708123/f95KX4IkB4qbt10eMdiW9SMyBEf_5uMPsr2vwXtoxNmE6OG4B0fFGM_KUesDb8wOTEJQ'
+$content = @"
+$discordusernameentrysend Submitted this log file.
+"@
+$payload = [PSCustomObject]@{
+    content = $content
+}
+Invoke-RestMethod -Uri $Uri -Method Post -Body ($payload | ConvertTo-Json) -ContentType 'Application/Json'
 function Submit-TextFile($filePath,$Uri){
     $filename = (Get-ChildItem $filePath).Name
     $filecontents = Get-Content $filePath -raw
@@ -61,6 +71,6 @@ function Submit-TextFile($filePath,$Uri){
     }
     Invoke-RestMethod @params
 }
-$Uri = 'https://discord.com/api/webhooks/838597970369708123/f95KX4IkB4qbt10eMdiW9SMyBEf_5uMPsr2vwXtoxNmE6OG4B0fFGM_KUesDb8wOTEJQ'
 $filePath = (Get-Item $scstlog).FullName
 Submit-TextFile $filePath $Uri
+Remove-Item -Path "$scstlog"

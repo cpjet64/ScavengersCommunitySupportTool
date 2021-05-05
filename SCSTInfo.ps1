@@ -7,27 +7,29 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   Exit
  }
 }
-
 if (Test-Path $scstinfo) {
   }
   else {
     New-Item "$env:temp\SCSTInfo.log"
   }
-
 $scstinfo = "$env:temp\SCSTInfo.log"
-
 Get-ComputerInfo | Select-Object WindowsProductName, WindowsVersion, OsHardwareAbstractionLayer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Force
-
 Get-CimInstance -ClassName CIM_Processor | Select-Object -Property Name, MaxClockSpeed, SocketDesignation, Manufacturer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-
 Get-CimInstance -ClassName CIM_VideoController | Format-Table -AutoSize -Property Name, CurrentHorizontalResolution, CurrentVerticalResolution, CurrentRefreshRate, @{Name="AdapterRamGB"; Expression={[int]($_.AdapterRam/1GB)}}, DriverDate, DriverVersion | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-
 Get-CimInstance -ClassName CIM_PhysicalMemory | Format-Table -AutoSize Manufacturer, PartNumber, Speed, DeviceLocator, @{Name="CapacityGB"; Expression={[int]($_.Capacity/1GB)}} | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-
 Get-CimInstance -ClassName CIM_DiskDrive | Format-Table -AutoSize DeviceID, Model, @{Name="SizeGB"; Expression={[int]($_.Size/1GB)}} | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-
 Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID, @{Name="SizeGB"; Expression={[int]($_.Size/1GB)}} | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
+$discordusernameentrysend = Get-Content -Path "$env:TEMP\SCSTDiscord.txt"
+$Uri = 'https://discord.com/api/webhooks/838597970369708123/f95KX4IkB4qbt10eMdiW9SMyBEf_5uMPsr2vwXtoxNmE6OG4B0fFGM_KUesDb8wOTEJQ'
+$content = @"
 
+$discordusernameentrysend Submitted this log file.
+
+"@
+$payload = [PSCustomObject]@{
+    content = $content
+}
+Invoke-RestMethod -Uri $Uri -Method Post -Body ($payload | ConvertTo-Json) -ContentType 'Application/Json'
 function Submit-TextFile($filePath,$Uri){
     $filename = (Get-ChildItem $filePath).Name
     $filecontents = Get-Content $filePath -raw
@@ -42,6 +44,5 @@ function Submit-TextFile($filePath,$Uri){
     }
     Invoke-RestMethod @params
 }
-$Uri = 'https://discord.com/api/webhooks/838597970369708123/f95KX4IkB4qbt10eMdiW9SMyBEf_5uMPsr2vwXtoxNmE6OG4B0fFGM_KUesDb8wOTEJQ'
 $filePath = (Get-Item $scstinfo).FullName
 Submit-TextFile $filePath $Uri
