@@ -28,7 +28,6 @@ $DataCollectorButton.Text = [System.String]'Data Collector'
 $DataCollectorButton.UseCompatibleTextRendering = $true
 $DataCollectorButton.UseVisualStyleBackColor = $true
 $DataCollectorButton.Visible = $false
-$DataCollectorButton.add_EnabledChanged($DataCollectorButton_Click)
 $DataCollectorButton.add_VisibleChanged($AcceptCheckbox_CheckedChanged)
 $DataCollectorButton.add_Click($DataCollectorButton_Click)
 #
@@ -43,7 +42,6 @@ $RepairToolButton.Text = [System.String]'Repair Tool'
 $RepairToolButton.UseCompatibleTextRendering = $true
 $RepairToolButton.UseVisualStyleBackColor = $true
 $RepairToolButton.Visible = $false
-$RepairToolButton.add_EnabledChanged($RepairToolButton_Click)
 $RepairToolButton.add_VisibleChanged($AcceptCheckbox_CheckedChanged)
 $RepairToolButton.add_Click($RepairToolButton_Click)
 #

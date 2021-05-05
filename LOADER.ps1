@@ -24,8 +24,6 @@ function datacollector {
 (& ".\SCSTCOLLECTDATA.ps1")
 }
 
-datacollector
-
 Add-Type -AssemblyName System.Windows.Forms
 . (Join-Path $PSScriptRoot 'loader.designer.ps1')
 $LauncherWindow.ShowDialog()
