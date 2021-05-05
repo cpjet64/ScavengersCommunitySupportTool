@@ -1,10 +1,10 @@
 $RepairToolButton_Click = {
 	$RepairToolButton.Enabled = $false
-	${function:repairtool}
+	repairtool
 }
 $DataCollectorButton_Click = {
 	$DataCollectorButton.Enabled = $false
-	${function:datacollector}
+	datacollector
 }
 $LauncherWindow_Load = {
 }
