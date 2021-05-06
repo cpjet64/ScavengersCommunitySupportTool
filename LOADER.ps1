@@ -1,3 +1,4 @@
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 function ElevatetoAdmin
 {
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
