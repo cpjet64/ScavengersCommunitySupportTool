@@ -7,6 +7,12 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   Exit
  }
 }
+
+
+
+
+function Repair
+{
 $dismlog = "$env:TEMP\SCST-DISM.log"
 Start-Process -FilePath "$env:SystemRoot\System32\sfc.exe" -ArgumentList "/scannow" -Wait
 Start-Process -FilePath "$env:SystemRoot\System32\Dism.exe" -ArgumentList "/Online /Cleanup-Image /RestoreHealth /LogPath:$dismlog" -Wait
@@ -48,29 +54,9 @@ Add-Content -Path "$scstlog" -Value "`r`nDISM LOG BEGINS HERE" -Encoding UTF8
 $getdismlog = Get-Content -Path "$env:TEMP\SCST-DISM.log"
 Add-Content -Path "$scstlog" -Value "$getdismlog" -Encoding UTF8
 Remove-Item -Path "$env:TEMP\SCST-DISM.log"
-$discordusernameentrysend = Get-Content -Path "$env:TEMP\SCSTDiscord.txt"
-$Uri = 'https://discord.com/api/webhooks/838597970369708123/f95KX4IkB4qbt10eMdiW9SMyBEf_5uMPsr2vwXtoxNmE6OG4B0fFGM_KUesDb8wOTEJQ'
-$content = @"
-$discordusernameentrysend Submitted this log file.
-"@
-$payload = [PSCustomObject]@{
-    content = $content
 }
-Invoke-RestMethod -Uri $Uri -Method Post -Body ($payload | ConvertTo-Json) -ContentType 'Application/Json'
-function Submit-TextFile($filePath,$Uri){
-    $filename = (Get-ChildItem $filePath).Name
-    $filecontents = Get-Content $filePath -raw
-    $boundary = [guid]::NewGuid().ToString()
-    $contentinfo = "Content-Disposition: form-data; name=`"file`"; filename=`"$filename`"`nContent-Type: text/html; charset=utf-8`n"
-    $body = "--$boundary`n$contentinfo`n$filecontents`n--$boundary--`n"
-    $params = @{
-        Uri         = $Uri
-        Body        = $body
-        Method      = 'Post'
-        ContentType = "multipart/form-data; boundary=$boundary"
-    }
-    Invoke-RestMethod @params
-}
-$filePath = (Get-Item $scstlog).FullName
-Submit-TextFile $filePath $Uri
+
+
+
+
 Remove-Item -Path "$scstlog"
