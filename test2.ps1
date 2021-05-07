@@ -75,3 +75,18 @@ function GenerateForm {
     
     #Call the Function
     GenerateForm
+
+
+
+
+
+
+
+
+
+
+    WARNING: This tool will collect non-specific hardware data about your computer and your Discord Username to better assist the game developers and support team in helping you. Nothing will be transmitted until you select Data Collector or Repair Tool. You can read more about whats collected at the <Hyperlink RequestNavigate="Developers GitHub" NavigateUri="https://github.com/cpjet64/ScavengersUE4SupportTool">link</Hyperlink>.
+
+
+
+    Please wait while the tool is running. Please do not click on anything or press any keys on your keyboard either.
