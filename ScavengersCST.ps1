@@ -26,12 +26,10 @@ $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation
 Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
 }
 }}
-ElevatetoAdmin
 $CloseButton_Click = {
 	$LauncherWindow.Close()
 }
 $DataCollectorButton_Click = {
-	$PleaseWaitForm.ShowDialog()
 	Set-Variable -name "scstinfo" -value "$env:temp\SCSTInfo.log"
 	Set-Variable -name "uploadtype" -value "Info"
 	usernameinput
@@ -43,7 +41,7 @@ $DataCollectorButton_Click = {
 	start-Sleep 1
 	Set-Variable -name "logfiletoupload" -value "$scstinfo"
 	UploadtoDiscord -wait
-	$PleaseWaitForm.Close()
+	Cleanup -wait
 	$CloseButton.Enabled = $true
 	$RepairToolButton.Enabled = $true
 	$DataCollectorButton.Enabled = $true
@@ -64,6 +62,7 @@ $RepairToolButton_Click = {
 	UploadtoDiscord -wait
 	Set-Variable -name "logfiletoupload" -value "$scstrepair"
 	UploadtoDiscord -wait
+	Cleanup -wait
 	$CloseButton.Enabled = $true
 	$RepairToolButton.Enabled = $true
 	$DataCollectorButton.Enabled = $true
@@ -118,6 +117,9 @@ function Submit-TextFile($filePath,$Uri){
 }
 $filePath = (Get-Item $logfiletoupload).FullName
 Submit-TextFile $filePath $Uri
+}
+function Cleanup
+{
 if (Test-Path $env:TEMP\SCSTDiscord.txt) {
 	Remove-Item -Path "$env:temp\SCSTDiscord.txt" 
 }
@@ -126,9 +128,12 @@ if (Test-Path $env:temp\SCSTInfo.log) {
 	Remove-Item -Path "$env:temp\SCSTInfo.log"
 }
 else {}
-
 if (Test-Path $env:temp\SCSTRepair.log) {
 	Remove-Item -Path "$env:temp\SCSTRepair.log"
+}
+else {}
+if (Test-Path $env:temp\SCSTDISM.log) {
+	Remove-Item -Path "$env:temp\SCSTDISM.log"
 }
 else {}
 }
@@ -148,7 +153,8 @@ Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID, @{
 }
 function Repair
 {
-$dismlog = "$env:TEMP\SCST-DISM.log"
+$dismlog = "$env:TEMP\SCSTDISM.log"
+New-Item "$dismlog"
 Start-Process -FilePath "$env:SystemRoot\System32\sfc.exe" -ArgumentList "/scannow" -Wait
 Start-Process -FilePath "$env:SystemRoot\System32\Dism.exe" -ArgumentList "/Online /Cleanup-Image /RestoreHealth /LogPath:$dismlog" -Wait
 $sourcedirectx = "https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe"
@@ -186,10 +192,9 @@ Add-Content -Path "$scstrepair" -Value "`r`nSFC LOG BEGINS HERE" -Encoding utf8
 $sr = Get-Content c:\windows\Logs\CBS\CBS.log | Where-Object {$_.Contains("[SR]")} | Select-object -Property @{Name="LastCheckDate"; Expression = {$_.substring(0,10)}} -last 1
 Get-Content c:\windows\Logs\CBS\CBS.log | where-object {$_.Contains("[SR]") -and $_.Contains($sr.lastcheckdate)} | Select-String -notmatch "Verify complete","Verifying","Beginning Verify and Repair" | Out-File -FilePath "$scstrepair" -Encoding utf8 -Append
 Add-Content -Path "$scstrepair" -Value "`r`nDISM LOG BEGINS HERE" -Encoding UTF8
-$getdismlog = Get-Content -Path "$env:TEMP\SCST-DISM.log"
+$getdismlog = Get-Content -Path "$env:TEMP\SCSTDISM.log"
 Add-Content -Path "$scstrepair" -Value "$getdismlog" -Encoding UTF8
 }
 Add-Type -AssemblyName System.Windows.Forms
 . (Join-Path $PSScriptRoot 'ScavengersCST.designer.ps1')
-. (Join-Path $PSScriptRoot 'pleasewait.designer.ps1')
 $LauncherWindow.ShowDialog()

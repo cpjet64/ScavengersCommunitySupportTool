@@ -3,7 +3,7 @@
     OutputPath = 'c:\Users\curtp\Downloads\SCSTRepo\ScavengersUE4SupportTool\compiled'
     Package = @{
         Enabled = $true
-        Obfuscate = $true
+        Obfuscate = $false
         HideConsoleWindow = $false
         DotNetVersion = 'v4.6.2'
         FileVersion = '1.3'
@@ -16,7 +16,7 @@
         PackageType = 'Console'
     }
     Bundle = @{
-        Enabled = $false
+        Enabled = $true
         Modules = $true
         # IgnoredModules = @()
     }
