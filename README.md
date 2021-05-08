@@ -6,7 +6,9 @@ Download the latest release from https://github.com/cpjet64/ScavengersUE4Support
 
 To use this tool, save all files DIRECTLY into your Downloads folder. 
 Right click the ScavengersCST.exe, click Properties, and check off "Unblock" as shown below, then click Apply. 
-After that, run the ScavengersCST.exe file and click the function you were told to select. Once you select a function you will be presented with a User Account Control (UAC) popup asking if you want to allow the program to make changes to your computer. Make sure to select YES.
+After that, run the ScavengersCST.exe file and click the function you were told to select. 
+Once you select a function you will be presented with a User Account Control (UAC) popup asking if you want to allow the program to make changes to your computer. 
+Make sure to select YES.
 The tool will now start running several included with Windows repair tools and then download and install the latest DirectX and Visual C++ Redistributables.
 
 While the tool is running the buttons will grey out to prevent you from clicking on them but please make sure NOT TO touch your keyboard or click anything with your mouse.
@@ -26,7 +28,11 @@ VisualC++ 64bit x64 Redistributable from Microsoft @ https://aka.ms/vs/16/releas
 
 PRIVACY WARNING
 
-This tool will collect the following data and transmit it automatically upon completion of running either the Data Collector or Repair functions. This data will be transmitted via Discord to the Developers and Support Team of Scavengers Game. This data will be used to assist with troubleshooting and repairing PC issues. If you would like to request a copy of the data transmitted please contact one of the Moderation Staff in the Official Discord of Scavengers and provide the Discord username you used when the tool requested it.
+This tool will collect the following data and transmit it automatically upon completion of running either the Data Collector or Repair functions. 
+This data will be transmitted via Discord to the Developers and Support Team of Scavengers Game. 
+This data will be used to assist with troubleshooting and repairing PC issues. 
+If you would like to request a copy of the data transmitted please contact one of the Moderation Staff in the Official Discord of Scavengers and provide the Discord username you used when the tool requested it.
+
 Data collected:
 CPU - Name, MaxClockSpeed, SocketDesignation, Manufacturer
 GPU - Name, CurrentHorizontalResolution, CurrentVerticalResolution, CurrentRefreshRate, AdapterRam, DriverDate, DriverVersion
