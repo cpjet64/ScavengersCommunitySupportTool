@@ -1,21 +1,3 @@
-$Label2_Click = {
-}
-$Label1_Click = {
-}
-$GithubLabel_Click = {
-}
-$SafetyLabel_Click = {
-}
-$PrivacyLabel_Click = {
-}
-$LauncherWindow_Load = {
-}
-$PleaseWaitLabel_Click = {
-}
-$VersionLabel_Click = {
-}
-$AboutMeLabel_Click = {
-}
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 function ElevatetoAdmin
 {
@@ -30,6 +12,7 @@ $CloseButton_Click = {
 	$LauncherWindow.Close()
 }
 $DataCollectorButton_Click = {
+	ElevatetoAdmin
 	Set-Variable -name "scstinfo" -value "$env:temp\SCSTInfo.log"
 	Set-Variable -name "uploadtype" -value "Info"
 	usernameinput
@@ -47,6 +30,7 @@ $DataCollectorButton_Click = {
 	$DataCollectorButton.Enabled = $true
 }
 $RepairToolButton_Click = {
+	ElevatetoAdmin
 	Set-Variable -name "scstinfo" -value "$env:temp\SCSTInfo.log"
 	Set-Variable -name "scstrepair" -value "$env:temp\SCSTRepair.log"
 	Set-Variable -name "uploadtype" -value "Repair"
@@ -79,12 +63,10 @@ $title = 'Scavengers Community Support Tool'
 $msg   = 'Please Enter Your Discord Username Including the Numbers'
 $discordusernameentry = [Microsoft.VisualBasic.Interaction]::InputBox($msg, $title)
 if (Test-Path $env:TEMP\SCSTDiscord.txt) {
-	Set-Content -Path "$env:TEMP\SCSTDiscord.txt" -Value "$discordusernameentry" -Encoding UTF8
-}
+	Set-Content -Path "$env:TEMP\SCSTDiscord.txt" -Value "$discordusernameentry" -Encoding UTF8}
 else {
 	New-Item "$env:TEMP\SCSTDiscord.txt"
-	Set-Content -Path "$env:TEMP\SCSTDiscord.txt" -Value "$discordusernameentry" -Encoding UTF8
-}
+	Set-Content -Path "$env:TEMP\SCSTDiscord.txt" -Value "$discordusernameentry" -Encoding UTF8}
 }
 function UploadtoDiscord
 {
@@ -121,29 +103,23 @@ Submit-TextFile $filePath $Uri
 function Cleanup
 {
 if (Test-Path $env:TEMP\SCSTDiscord.txt) {
-	Remove-Item -Path "$env:temp\SCSTDiscord.txt" 
-}
+	Remove-Item -Path "$env:temp\SCSTDiscord.txt"}
 else {}
 if (Test-Path $env:temp\SCSTInfo.log) {
-	Remove-Item -Path "$env:temp\SCSTInfo.log"
-}
+	Remove-Item -Path "$env:temp\SCSTInfo.log"}
 else {}
 if (Test-Path $env:temp\SCSTRepair.log) {
-	Remove-Item -Path "$env:temp\SCSTRepair.log"
-}
+	Remove-Item -Path "$env:temp\SCSTRepair.log"}
 else {}
 if (Test-Path $env:temp\SCSTDISM.log) {
-	Remove-Item -Path "$env:temp\SCSTDISM.log"
-}
+	Remove-Item -Path "$env:temp\SCSTDISM.log"}
 else {}
 }
 function CollectInfo
 {
-if (Test-Path $scstinfo) {
-}
-else {
-  New-Item "$env:temp\SCSTInfo.log"
-}
+ElevatetoAdmin
+if (Test-Path $scstinfo) {}
+else {New-Item "$env:temp\SCSTInfo.log"}
 Get-ComputerInfo | Select-Object WindowsProductName, WindowsVersion, OsHardwareAbstractionLayer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Force
 Get-CimInstance -ClassName CIM_Processor | Select-Object -Property Name, MaxClockSpeed, SocketDesignation, Manufacturer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
 Get-CimInstance -ClassName CIM_VideoController | Format-Table -AutoSize -Property Name, CurrentHorizontalResolution, CurrentVerticalResolution, CurrentRefreshRate, @{Name="AdapterRamGB"; Expression={[int]($_.AdapterRam/1GB)}}, DriverDate, DriverVersion | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
@@ -153,8 +129,11 @@ Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID, @{
 }
 function Repair
 {
+ElevatetoAdmin
 $dismlog = "$env:TEMP\SCSTDISM.log"
-New-Item "$dismlog"
+
+if (Test-Path "$dismlog") {}
+else {New-Item "$dismlog"}
 Start-Process -FilePath "$env:SystemRoot\System32\sfc.exe" -ArgumentList "/scannow" -Wait
 Start-Process -FilePath "$env:SystemRoot\System32\Dism.exe" -ArgumentList "/Online /Cleanup-Image /RestoreHealth /LogPath:$dismlog" -Wait
 $sourcedirectx = "https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe"
@@ -170,11 +149,9 @@ $dxsetup = "$env:TEMP\DirectXInstaller\DXSETUP.exe"
 if (Test-Path -Path "$env:TEMP\DirectXInstaller") {
     Remove-Item -Path "$env:TEMP\DirectXInstaller" -Recurse
     Start-Process -FilePath "$destinationdirectx" -ArgumentList "/Q /T:$env:TEMP\DirectXInstaller\" -Wait
-    Start-Process -FilePath "$dxsetup" -ArgumentList "/silent" -Wait
-} else {
-    Start-Process -FilePath "$destinationdirectx" -ArgumentList "/Q /T:$env:TEMP\DirectXInstaller\" -Wait
-    Start-Process -FilePath "$dxsetup" -ArgumentList "/silent" -Wait
-}
+    Start-Process -FilePath "$dxsetup" -ArgumentList "/silent" -Wait} 
+else {Start-Process -FilePath "$destinationdirectx" -ArgumentList "/Q /T:$env:TEMP\DirectXInstaller\" -Wait
+    Start-Process -FilePath "$dxsetup" -ArgumentList "/silent" -Wait}
 Start-Process -FilePath "$destinationvcredisx86" -ArgumentList "/install /quiet /norestart" -Wait
 Start-Process -FilePath "$destinationvcredisx64" -ArgumentList "/install /quiet /norestart" -Wait
 Remove-Item -Path "$destinationdirectx"
@@ -182,11 +159,8 @@ Remove-Item -Path "$env:TEMP\DirectXInstaller" -Recurse
 Remove-Item -Path "$destinationvcredisx86"
 Remove-Item -Path "$destinationvcredisx64"
 if (Test-Path $env:TEMP\SCSTRepair.log) {
-    Remove-Item -Path "$env:TEMP\SCSTRepair.log"
-}
-else {
-    New-Item "$env:TEMP\SCSTRepair.log"
-}
+    Remove-Item -Path "$env:TEMP\SCSTRepair.log"}
+else {New-Item "$env:TEMP\SCSTRepair.log"}
 $scstrepair = "$env:TEMP\SCSTRepair.log"
 Add-Content -Path "$scstrepair" -Value "`r`nSFC LOG BEGINS HERE" -Encoding utf8
 $sr = Get-Content c:\windows\Logs\CBS\CBS.log | Where-Object {$_.Contains("[SR]")} | Select-object -Property @{Name="LastCheckDate"; Expression = {$_.substring(0,10)}} -last 1
