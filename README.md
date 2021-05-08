@@ -35,17 +35,10 @@ If you would like to request a copy of the data transmitted please contact one o
 Moderation Staff in the Official Discord of Scavengers and provide the Discord username you used when the tool requested it.
 
 Data collected:
-CPU 
-- Name, MaxClockSpeed, SocketDesignation, Manufacturer
-GPU 
-- Name, CurrentHorizontalResolution, CurrentVerticalResolution, CurrentRefreshRate, AdapterRam, DriverDate, DriverVersion
-RAM/MEMORY 
-- Manufacturer, PartNumber, Speed, DeviceLocator
-Disk Drive 
-- DeviceID, Model (To translate, this collects the model number and which physical drive it is)
-Logial Disk/Partition 
-- DeviceID (To translate, this collects the partitions for example the C:\ drive or the D:\ drive and how many GB the size is)
-SFC Tool Logfile 
-- This tool collates the repair information from the CBS.log file which is generated when the SFC Tool is run
-DISM Tool Logfile 
-- This tool collates the repair information from the custom DISM logfile which is generated when the DISM Tool is run
+CPU - Name, MaxClockSpeed, SocketDesignation, Manufacturer
+GPU - Name, CurrentHorizontalResolution, CurrentVerticalResolution, CurrentRefreshRate, AdapterRam, DriverDate, DriverVersion
+RAM/MEMORY - Manufacturer, PartNumber, Speed, DeviceLocator
+Disk Drive - DeviceID, Model (To translate, this collects the model number and which physical drive it is)
+Logial Disk/Partition - DeviceID (To translate, this collects the partitions for example the C:\ drive or the D:\ drive and how many GB the size is)
+SFC Tool Logfile - This tool collates the repair information from the CBS.log file which is generated when the SFC Tool is run
+DISM Tool Logfile - This tool collates the repair information from the custom DISM logfile which is generated when the DISM Tool is run
