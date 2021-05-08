@@ -1,0 +1,38 @@
+﻿
+This Hash file was generated on 05/07/2021 22:43:26 (UTC-05:00) Eastern Time (US & Canada) by Cpjet64
+
+Algorithm Hash                            
+--------- ----                            
+MD5       B870D33E4D6B30326E87C45735FEB7AE
+
+
+
+Algorithm Hash                                    
+--------- ----                                    
+SHA1      F69220B62FB2644D0B2D5A766CCBA93D010A51A6
+
+
+
+Algorithm Hash                                                            
+--------- ----                                                            
+SHA256    58CD31AB64507DF00F60E8BABB1F6B68753AB5D9B573F58B0704602FAA2C0762
+
+
+
+Algorithm Hash                                                                                                                            
+--------- ----                                                                                                                            
+SHA512    1FC71EC4D3934837D6EE577EF7029F83FFFD7B1CD20EC3C8A9B4355E7CA92B357B1B561AB5F1A5159EB5B7B8CC4E7F845AAFD51027CE0943A5352F21657EECEF
+
+
+
+Algorithm    Hash            
+---------    ----            
+MACTRIPLEDES 607EE92E083C1BD0
+
+
+
+Algorithm Hash                                    
+--------- ----                                    
+RIPEMD160 B3A6B21730051FE352B558FA02C191A0649FE3A8
+
+
