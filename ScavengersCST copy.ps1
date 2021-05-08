@@ -1,4 +1,13 @@
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+function ElevatetoAdmin
+{
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
+$CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
+Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
+}
+}}
 $CloseButton_Click = {
 	$LauncherWindow.Close()
 }
@@ -106,6 +115,7 @@ else {}
 }
 function CollectInfo
 {
+ElevatetoAdmin
 if (Test-Path $scstinfo) {}
 else {New-Item "$env:temp\SCSTInfo.log"}
 Get-ComputerInfo | Select-Object WindowsProductName, WindowsVersion, OsHardwareAbstractionLayer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Force
@@ -117,6 +127,7 @@ Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID, @{
 }
 function Repair
 {
+ElevatetoAdmin
 $dismlog = "$env:TEMP\SCSTDISM.log"
 
 if (Test-Path "$dismlog") {}
