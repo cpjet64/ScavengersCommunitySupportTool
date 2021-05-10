@@ -1,0 +1,15 @@
+@{
+'DataCollectorButton.Name' = 'DataCollectorButton'
+'RepairToolButton.Name' = 'RepairToolButton'
+'AcceptCheckBox.Name' = 'AcceptCheckBox'
+'UnofficialToolLabel.Name' = 'UnofficialToolLabel'
+'ClickCheckboxLabel.Name' = 'ClickCheckboxLabel'
+'AboutMeLabel.Name' = 'AboutMeLabel'
+'VersionLabel.Name' = 'VersionLabel'
+'CloseButton.Name' = 'CloseButton'
+'SafetyLabel.Name' = 'SafetyLabel'
+'GithubLabel.Name' = 'GithubLabel'
+'Label1.Name' = 'Label1'
+'Label1.Text' = 'WARNING: This software will collect and transmit data through Discord to the Devs and Support Team to assist with troubleshooting your PC and tracking the crash reason. To learn more about what is collected and transmitted please check the GitHub link mentioned above.  Checking the box below means you allow the abovementioned to utilize, store, transmit the collected data in order to repair and prevent issues in relations to the Scavengers Game.'
+'$this.Name' = 'LauncherWindow'
+}

@@ -1,4 +1,18 @@
-﻿$CloseButton_Click = {
+$LauncherWindow_Load = {
+}
+$GithubLabel_Click = {
+}
+$SafetyLabel_Click = {
+}
+$VersionLabel_Click = {
+}
+$AboutMeLabel_Click = {
+}
+$Label2_Click = {
+}
+$Label1_Click = {
+}
+$CloseButton_Click = {
   $LauncherWindow.Close()
 }
 $DataCollectorButton_Click = {
