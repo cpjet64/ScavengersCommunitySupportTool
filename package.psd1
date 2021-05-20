@@ -1,6 +1,6 @@
 @{
-    Root = 'c:\Users\curtp\Downloads\SCSTRepo\ScavengersUE4SupportTool\ScavengersCST.ps1'
-    OutputPath = 'c:\Users\curtp\Downloads\SCSTRepo\ScavengersUE4SupportTool\out'
+    Root = 'c:\GITHUBREPOS\ScavengersUE4SupportTool\ScavengersCST.ps1'
+    OutputPath = 'c:\GITHUBREPOS\ScavengersUE4SupportTool\out'
     Package = @{
         Enabled = $true
         Obfuscate = $false
@@ -11,7 +11,7 @@
         ProductName = ''
         ProductVersion = ''
         Copyright = ''
-        RequireElevation = $false
+        RequireElevation = $true
         ApplicationIconPath = ''
         PackageType = 'Console'
     }

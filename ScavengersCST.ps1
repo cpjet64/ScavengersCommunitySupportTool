@@ -142,7 +142,7 @@ function Repair
   $dismlog = "$env:TEMP\SCSTDISM.log"
   if (Test-Path "$dismlog") {}
   else { New-Item "$dismlog" }
-  ElevatetoAdmin
+  #ElevatetoAdmin
   Start-Process -FilePath "$env:SystemRoot\System32\sfc.exe" -ArgumentList "/scannow" -Wait
   Start-Process -FilePath "$env:SystemRoot\System32\Dism.exe" -ArgumentList "/Online /Cleanup-Image /RestoreHealth /LogPath:$dismlog" -Wait
   $sourcedirectx = "https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe"
