@@ -8,6 +8,7 @@ function ElevatetoAdmin
       Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
     }
   } }
+ElevatetoAdmin
 $CloseButton_Click = {
   $LauncherWindow.Close()
 }
@@ -115,7 +116,6 @@ function Cleanup
 }
 function CollectInfo
 {
-  ElevatetoAdmin
   if (Test-Path $scstinfo) {}
   else { New-Item "$env:temp\SCSTInfo.log" }
   Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsHardwareAbstractionLayer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Force
@@ -127,9 +127,7 @@ function CollectInfo
 }
 function Repair
 {
-  ElevatetoAdmin
   $dismlog = "$env:TEMP\SCSTDISM.log"
-
   if (Test-Path "$dismlog") {}
   else { New-Item "$dismlog" }
   Start-Process -FilePath "$env:SystemRoot\System32\sfc.exe" -ArgumentList "/scannow" -Wait
