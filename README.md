@@ -1,3 +1,5 @@
+!!IF YOU ARE HERE FROM THE SCAVENGERS DISCORD DO NOT USE THIS TESTING AND DEVELOPEMENT VERSION!!
+
 # ScavengersCommunitySupportTool
 
 This software is free and open source. If you have any questions please contact Cpjet64#5663 via Discord.
