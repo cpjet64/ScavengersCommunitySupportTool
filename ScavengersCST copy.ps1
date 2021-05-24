@@ -1,21 +1,24 @@
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-function ElevatetoAdmin
-{
-  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-  if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
-    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-      $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-      Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
-    }
-  } }
-ElevatetoAdmin
+﻿$LauncherWindow_Load = {
+}
+$GithubLabel_Click = {
+}
+$SafetyLabel_Click = {
+}
+$VersionLabel_Click = {
+}
+$AboutMeLabel_Click = {
+}
+$Label2_Click = {
+}
+$Label1_Click = {
+}
 $CloseButton_Click = {
   $LauncherWindow.Close()
 }
 $DataCollectorButton_Click = {
   Set-Variable -Name "scstinfo" -Value "$env:temp\SCSTInfo.log"
   Set-Variable -Name "uploadtype" -Value "Info"
-  usernameinput
+  UsernameInput
   $CloseButton.Enabled = $false
   $DataCollectorButton.Enabled = $false
   $RepairToolButton.Enabled = $false
@@ -33,7 +36,7 @@ $RepairToolButton_Click = {
   Set-Variable -Name "scstinfo" -Value "$env:temp\SCSTInfo.log"
   Set-Variable -Name "scstrepair" -Value "$env:temp\SCSTRepair.log"
   Set-Variable -Name "uploadtype" -Value "Repair"
-  usernameinput
+  UsernameInput
   $CloseButton.Enabled = $false
   $DataCollectorButton.Enabled = $false
   $RepairToolButton.Enabled = $false
@@ -56,7 +59,16 @@ $AcceptCheckbox_CheckedChanged = {
   if ($AcceptCheckBox.Checked) { $RepairToolButton.Visible = $true }
   else { $RepairToolButton.Visible = $false }
 }
-function usernameinput {
+function ElevatetoAdmin
+{
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+  if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
+    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
+      $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
+      Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
+    }
+  } }
+function UsernameInput {
   ([void][Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic'))
   $title = 'Scavengers Community Support Tool'
   $msg = 'Please Enter Your Discord Username Including the Numbers'
@@ -130,6 +142,7 @@ function Repair
   $dismlog = "$env:TEMP\SCSTDISM.log"
   if (Test-Path "$dismlog") {}
   else { New-Item "$dismlog" }
+  #ElevatetoAdmin
   Start-Process -FilePath "$env:SystemRoot\System32\sfc.exe" -ArgumentList "/scannow" -Wait
   Start-Process -FilePath "$env:SystemRoot\System32\Dism.exe" -ArgumentList "/Online /Cleanup-Image /RestoreHealth /LogPath:$dismlog" -Wait
   $sourcedirectx = "https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe"
