@@ -1,36 +1,7 @@
 ﻿$LauncherWindow_Load = {
 }
-$GithubLabel_Click = {
-}
-$SafetyLabel_Click = {
-}
-$VersionLabel_Click = {
-}
-$AboutMeLabel_Click = {
-}
-$Label2_Click = {
-}
-$Label1_Click = {
-}
 $CloseButton_Click = {
   $LauncherWindow.Close()
-}
-$DataCollectorButton_Click = {
-  Set-Variable -Name "scstinfo" -Value "$env:temp\SCSTInfo.log"
-  Set-Variable -Name "uploadtype" -Value "Info"
-  UsernameInput
-  $CloseButton.Enabled = $false
-  $DataCollectorButton.Enabled = $false
-  $RepairToolButton.Enabled = $false
-  Start-Sleep 1
-  CollectInfo -Wait
-  Start-Sleep 1
-  Set-Variable -Name "logfiletoupload" -Value "$scstinfo"
-  UploadtoDiscord -Wait
-  Cleanup -Wait
-  $CloseButton.Enabled = $true
-  $RepairToolButton.Enabled = $true
-  $DataCollectorButton.Enabled = $true
 }
 $RepairToolButton_Click = {
   Set-Variable -Name "scstinfo" -Value "$env:temp\SCSTInfo.log"
@@ -45,13 +16,36 @@ $RepairToolButton_Click = {
   CollectInfo -Wait
   Repair -Wait
   Start-Sleep 1
+  Write-Host "Now collecting and uploading our log files to Discord"
   Set-Variable -Name "logfiletoupload" -Value "$scstinfo"
   UploadtoDiscord -Wait
   Set-Variable -Name "logfiletoupload" -Value "$scstrepair"
   UploadtoDiscord -Wait
-  Write-Host "Now uploading our log files to Discord"
-  Cleanup -Wait
+  Write-Host "Uploading to Discord finished"
   Write-Host "Now cleaning up the log files"
+  Cleanup -Wait
+  Write-Host "Finished cleaning up the log files"
+  Restart-Computer -Confirm -Force
+  $CloseButton.Enabled = $true
+  $RepairToolButton.Enabled = $true
+  $DataCollectorButton.Enabled = $true
+}
+$DataCollectorButton_Click = {
+  Set-Variable -Name "scstinfo" -Value "$env:temp\SCSTInfo.log"
+  Set-Variable -Name "uploadtype" -Value "Info"
+  UsernameInput
+  $CloseButton.Enabled = $false
+  $DataCollectorButton.Enabled = $false
+  $RepairToolButton.Enabled = $false
+  Start-Sleep 1
+  CollectInfo -Wait
+  Start-Sleep 1
+  Set-Variable -Name "logfiletoupload" -Value "$scstinfo"
+  Write-Host "Now collecting and uploading our log files to Discord"
+  UploadtoDiscord -Wait
+  Write-Host "Uploading to Discord finished"
+  Cleanup -Wait
+  Write-Host "Data collection complete you may now continue..."
   $CloseButton.Enabled = $true
   $RepairToolButton.Enabled = $true
   $DataCollectorButton.Enabled = $true
@@ -62,15 +56,6 @@ $AcceptCheckbox_CheckedChanged = {
   if ($AcceptCheckBox.Checked) {$RepairToolButton.Visible = $true}
   else {$RepairToolButton.Visible = $false}
 }
-function ElevatetoAdmin
-{
-  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-  if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
-    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-      $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-      Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
-    }
-  } }
 function UsernameInput {
   ([void][Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic'))
   $title = 'Scavengers Community Support Tool'
@@ -125,6 +110,7 @@ function Cleanup
 }
 function CollectInfo
 {
+  Write-Host "Data Collection Process Starting"
   if (Test-Path $scstinfo) {Remove-Item -Path "$scstinfo"}
   else {New-Item "$env:temp\SCSTInfo.log"}
   Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsHardwareAbstractionLayer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Force
@@ -133,9 +119,11 @@ function CollectInfo
   Get-CimInstance -ClassName CIM_PhysicalMemory | Format-Table -AutoSize Manufacturer,PartNumber,Speed,DeviceLocator,@{ Name = "CapacityGB"; Expression = { [int]($_.Capacity / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
   Get-CimInstance -ClassName CIM_DiskDrive | Format-Table -AutoSize DeviceID,Model,@{ Name = "SizeGB"; Expression = { [int]($_.Size / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
   Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID,@{ Name = "SizeGB"; Expression = { [int]($_.Size / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
+  Write-Host "Data Collection Process Finished"
 }
 function Repair
 {
+  Write-Host "Repair Process Starting"
   if (Test-Path "$dismlog") {}
   else { New-Item "$dismlog" }
   Write-Host "Now running the Windows System File Checker"
@@ -180,6 +168,7 @@ function Repair
   Add-Content -Path "$scstrepair" -Value "`r`nDISM LOG BEGINS HERE" -Encoding UTF8
   $getdismlog = Get-Content -Path "$env:TEMP\SCSTDISM.log"
   Add-Content -Path "$scstrepair" -Value "$getdismlog" -Encoding UTF8
+  Write-Host "Repair Process Finished make sure you restart your computer now"
 }
 Add-Type -AssemblyName System.Windows.Forms
 .(Join-Path $PSScriptRoot 'ScavengersCST.designer.ps1')

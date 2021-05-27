@@ -14,6 +14,7 @@
         RequireElevation = $true
         ApplicationIconPath = ''
         PackageType = 'Console'
+        Platform = 'x64'
     }
     Bundle = @{
         Enabled = $true

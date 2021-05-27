@@ -9,7 +9,7 @@ $LauncherWindow = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Button]$CloseButton = $null
 [System.Windows.Forms.Label]$SafetyLabel = $null
 [System.Windows.Forms.Label]$GithubLabel = $null
-[System.Windows.Forms.Label]$Label1 = $null
+[System.Windows.Forms.Label]$PrivacyWarningLabel1 = $null
 function InitializeComponent
 {
 $resources = . (Join-Path $PSScriptRoot 'scavengerscst.resources.ps1')
@@ -23,7 +23,7 @@ $VersionLabel = (New-Object -TypeName System.Windows.Forms.Label)
 $CloseButton = (New-Object -TypeName System.Windows.Forms.Button)
 $SafetyLabel = (New-Object -TypeName System.Windows.Forms.Label)
 $GithubLabel = (New-Object -TypeName System.Windows.Forms.Label)
-$Label1 = (New-Object -TypeName System.Windows.Forms.Label)
+$PrivacyWarningLabel1 = (New-Object -TypeName System.Windows.Forms.Label)
 $LauncherWindow.SuspendLayout()
 #
 #DataCollectorButton
@@ -76,7 +76,6 @@ $UnofficialToolLabel.TabIndex = [System.Int32]7
 $UnofficialToolLabel.Text = [System.String]'This is a UNOFFICIAL tool created by the community for the community. This tool is NOT supported by the game''s developer.'
 $UnofficialToolLabel.TextAlign = [System.Drawing.ContentAlignment]::TopCenter
 $UnofficialToolLabel.UseCompatibleTextRendering = $true
-$UnofficialToolLabel.add_Click($Label1_Click)
 #
 #ClickCheckboxLabel
 #
@@ -87,7 +86,6 @@ $ClickCheckboxLabel.TabIndex = [System.Int32]8
 $ClickCheckboxLabel.Text = [System.String]'Please check the box below to proceed.'
 $ClickCheckboxLabel.TextAlign = [System.Drawing.ContentAlignment]::TopCenter
 $ClickCheckboxLabel.UseCompatibleTextRendering = $true
-$ClickCheckboxLabel.add_Click($Label2_Click)
 #
 #AboutMeLabel
 #
@@ -99,7 +97,6 @@ $AboutMeLabel.TabIndex = [System.Int32]9
 $AboutMeLabel.Text = [System.String]'Developed by Cpjet64 and Void_Sentient/Hunhow'
 $AboutMeLabel.TextAlign = [System.Drawing.ContentAlignment]::TopCenter
 $AboutMeLabel.UseCompatibleTextRendering = $true
-$AboutMeLabel.add_Click($AboutMeLabel_Click)
 #
 #VersionLabel
 #
@@ -109,7 +106,6 @@ $VersionLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([
 $VersionLabel.TabIndex = [System.Int32]10
 $VersionLabel.Text = [System.String]'v1.3'
 $VersionLabel.UseCompatibleTextRendering = $true
-$VersionLabel.add_Click($VersionLabel_Click)
 #
 #CloseButton
 #
@@ -132,7 +128,6 @@ $SafetyLabel.TabIndex = [System.Int32]15
 $SafetyLabel.Text = [System.String]'If you downloaded this file from anywhere except the link below IMMEDIATELY delete the files, run a virus scan, and contact the Developer at the link below.'
 $SafetyLabel.TextAlign = [System.Drawing.ContentAlignment]::TopCenter
 $SafetyLabel.UseCompatibleTextRendering = $true
-$SafetyLabel.add_Click($SafetyLabel_Click)
 #
 #GithubLabel
 #
@@ -144,23 +139,22 @@ $GithubLabel.TabIndex = [System.Int32]16
 $GithubLabel.Text = [System.String]'https://github.com/cpjet64/ScavengersUE4SupportTool'
 $GithubLabel.TextAlign = [System.Drawing.ContentAlignment]::TopCenter
 $GithubLabel.UseCompatibleTextRendering = $true
-$GithubLabel.add_Click($GithubLabel_Click)
 #
-#Label1
+#PrivacyWarningLabel1
 #
-$Label1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]127))
-$Label1.Name = [System.String]'Label1'
-$Label1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]335,[System.Int32]132))
-$Label1.TabIndex = [System.Int32]20
-$Label1.Text = [System.String]$resources.'Label1.Text'
-$Label1.TextAlign = [System.Drawing.ContentAlignment]::MiddleCenter
-$Label1.UseCompatibleTextRendering = $true
+$PrivacyWarningLabel1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]127))
+$PrivacyWarningLabel1.Name = [System.String]'PrivacyWarningLabel1'
+$PrivacyWarningLabel1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]335,[System.Int32]132))
+$PrivacyWarningLabel1.TabIndex = [System.Int32]17
+$PrivacyWarningLabel1.Text = [System.String]$resources.'PrivacyWarningLabel1.Text'
+$PrivacyWarningLabel1.TextAlign = [System.Drawing.ContentAlignment]::MiddleCenter
+$PrivacyWarningLabel1.UseCompatibleTextRendering = $true
 #
 #LauncherWindow
 #
 $LauncherWindow.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]359,[System.Int32]386))
 $LauncherWindow.ControlBox = $false
-$LauncherWindow.Controls.Add($Label1)
+$LauncherWindow.Controls.Add($PrivacyWarningLabel1)
 $LauncherWindow.Controls.Add($GithubLabel)
 $LauncherWindow.Controls.Add($SafetyLabel)
 $LauncherWindow.Controls.Add($CloseButton)
@@ -192,6 +186,6 @@ Add-Member -InputObject $LauncherWindow -Name VersionLabel -Value $VersionLabel 
 Add-Member -InputObject $LauncherWindow -Name CloseButton -Value $CloseButton -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name SafetyLabel -Value $SafetyLabel -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name GithubLabel -Value $GithubLabel -MemberType NoteProperty
-Add-Member -InputObject $LauncherWindow -Name Label1 -Value $Label1 -MemberType NoteProperty
+Add-Member -InputObject $LauncherWindow -Name PrivacyWarningLabel1 -Value $PrivacyWarningLabel1 -MemberType NoteProperty
 }
 . InitializeComponent
