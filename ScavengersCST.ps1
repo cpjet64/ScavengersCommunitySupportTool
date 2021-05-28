@@ -1,5 +1,5 @@
 ﻿##
-#SCST v1.4.1
+#SCST v1.4.2
 ##
 $ResetAppDataButton_Click = {
   LocalAppDataRename
