@@ -138,11 +138,11 @@ function Repair
   Invoke-WebRequest -Uri $sourcedirectx -OutFile "$destinationdirectx"
   $sourcevcredisx86 = "https://aka.ms/vs/16/release/vc_redist.x86.exe"
   $destinationvcredisx86 = "$env:TEMP\vc_redist.x86.exe"
-  Write-Host "Now downloading the latest Visual C+++ 32bit Redistributable From Microsoft"
+  Write-Host "Now downloading the latest Visual C++ 32bit Redistributable From Microsoft"
   Invoke-WebRequest -Uri $sourcevcredisx86 -OutFile "$destinationvcredisx86"
   $sourcevcredisx64 = "https://aka.ms/vs/16/release/vc_redist.x64.exe"
   $destinationvcredisx64 = "$env:TEMP\vc_redist.x64.exe"
-  Write-Host "Now downloading the latest Visual C+++ 64bit Redistributable From Microsoft"
+  Write-Host "Now downloading the latest Visual C++ 64bit Redistributable From Microsoft"
   Invoke-WebRequest -Uri $sourcevcredisx64 -OutFile "$destinationvcredisx64"
   Write-Host "Now unpacking and installing the DirectX Redistributable"
   $dxsetup = "$env:TEMP\DirectXInstaller\DXSETUP.exe"
@@ -151,9 +151,9 @@ function Repair
     Start-Process -FilePath "$dxsetup" -ArgumentList "/silent" -Wait}
   else { Start-Process -FilePath "$destinationdirectx" -ArgumentList "/Q /T:$env:TEMP\DirectXInstaller\" -Wait
     Start-Process -FilePath "$dxsetup" -ArgumentList "/silent" -Wait }
-  Write-Host "Now installing the Visual C+++ 32bit Redistributable"
+  Write-Host "Now installing the Visual C++ 32bit Redistributable"
   Start-Process -FilePath "$destinationvcredisx86" -ArgumentList "/install /quiet /norestart" -Wait
-  Write-Host "Now installing the Visual C+++ 64bit Redistributable"
+  Write-Host "Now installing the Visual C++ 64bit Redistributable"
   Start-Process -FilePath "$destinationvcredisx64" -ArgumentList "/install /quiet /norestart" -Wait
   Write-Host "Now deleting all of the installers we just downloaded and ran"
   Remove-Item -Path "$destinationdirectx"
