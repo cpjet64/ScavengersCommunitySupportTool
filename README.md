@@ -1,46 +1,98 @@
-!!IF YOU ARE HERE FROM THE SCAVENGERS DISCORD DO NOT USE THIS TESTING AND DEVELOPEMENT VERSION!!
+<div align="center" id="top"> 
+  <img src="./.github/app.gif" alt="ScavengersUE4SupportTool" />
 
-# ScavengersCommunitySupportTool
+  &#xa0;
 
-This software is free and open source. If you have any questions please contact Cpjet64#5663 via Discord.
+  <!-- <a href="https://scavengersue4supporttool.netlify.app">Demo</a> -->
+</div>
 
-Download the latest release from https://github.com/cpjet64/ScavengersUE4SupportTool/releases
+<h1 align="center">ScavengersUE4SupportTool</h1>
 
-To use this tool, save all files DIRECTLY into your Downloads folder.  
-Right click the ScavengersCST.exe, click Properties, and check off "Unblock" as shown below, then click Apply.  
-After that, run the ScavengersCST.exe file and click the function you were told to select.  
-Once you select a function you will be presented with a User Account Control (UAC) popup asking if you want to allow the program to make changes to your computer.  
-Make sure to select YES.  
-The tool will now start running several included with Windows repair tools and then download and install the latest DirectX and Visual C++ Redistributables.  
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/scavengersue4supporttool?color=56BEB8">
 
-While the tool is running the buttons will grey out to prevent you from clicking on them but please make sure NOT TO touch your keyboard or click anything with your mouse.
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/scavengersue4supporttool?color=56BEB8">
 
-This tool will create the following files on your computer:  
-(These files are created and deleted automatically)  
-C:\Users\YOURUSERNAME\AppData\Local\Temp\SCSTInfo.log (This file contains the PC information)  
-C:\Users\YOURUSERNAME\AppData\Local\Temp\SCSTRepair.log (This file containts the PC information and the repair tool logs)  
-C:\Users\YOURUSERNAME\AppData\Local\Temp\SCSTDiscord.txt (This file contains the Discord username you were prompted to enter when you selected Data Collector or Repair)  
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/scavengersue4supporttool?color=56BEB8">
 
-This tool will download and install the following files on your computer:  
-(Not including the parts of Windows that will be automatically installed by Windows to allow you to run the tool)  
-(The downloaded installers will be deleted automatically once they are done runnning)  
-DirectX Redistributable from Microsoft @ https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe  
-VisualC++ 32Bit x86 Redistributable from Microsoft @ https://aka.ms/vs/16/release/vc_redist.x86.exe  
-VisualC++ 64bit x64 Redistributable from Microsoft @ https://aka.ms/vs/16/release/vc_redist.x64.exe
+  <img alt="License" src="https://img.shields.io/github/license/scavengersue4supporttool?color=56BEB8">
 
-PRIVACY WARNING
+  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/scavengersue4supporttool?color=56BEB8" /> -->
 
-This tool will collect the following data and transmit it automatically upon completion of running either the Data Collector or Repair functions.   
-This data will be transmitted via Discord to the Developers and Support Team of Scavengers Game.   
-This data will be used to assist with troubleshooting and repairing PC issues.   
-If you would like to request a copy of the data transmitted please contact one of the  
-Moderation Staff in the Official Discord of Scavengers and provide the Discord username you used when the tool requested it.
+  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/scavengersue4supporttool?color=56BEB8" /> -->
 
-Data collected:  
-CPU - Name, MaxClockSpeed, SocketDesignation, Manufacturer  
-GPU - Name, CurrentHorizontalResolution, CurrentVerticalResolution, CurrentRefreshRate, AdapterRam, DriverDate, DriverVersion  
-RAM/MEMORY - Manufacturer, PartNumber, Speed, DeviceLocator  
-Disk Drive - DeviceID, Model (To translate, this collects the model number and which physical drive it is)  
-Logial Disk/Partition - DeviceID (To translate, this collects the partitions for example the C:\ drive or the D:\ drive and how many GB the size is)  
-SFC Tool Logfile - This tool collates the repair information from the CBS.log file which is generated when the SFC Tool is run  
-DISM Tool Logfile - This tool collates the repair information from the custom DISM logfile which is generated when the DISM Tool is run  
+  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/scavengersue4supporttool?color=56BEB8" /> -->
+</p>
+
+<!-- Status -->
+
+<!-- <h4 align="center"> 
+	🚧  ScavengersUE4SupportTool 🚀 Under construction...  🚧
+</h4> 
+
+<hr> -->
+
+<p align="center">
+  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
+  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a> &#xa0; | &#xa0;
+  <a href="https://github.com/cpjet64" target="_blank">Author</a>
+</p>
+
+<br>
+
+## :dart: About ##
+
+Describe your project
+
+## :sparkles: Features ##
+
+:heavy_check_mark: Feature 1;\
+:heavy_check_mark: Feature 2;\
+:heavy_check_mark: Feature 3;
+
+## :rocket: Technologies ##
+
+The following tools were used in this project:
+
+- [Expo](https://expo.io/)
+- [Node.js](https://nodejs.org/en/)
+- [React](https://pt-br.reactjs.org/)
+- [React Native](https://reactnative.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## :white_check_mark: Requirements ##
+
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+
+## :checkered_flag: Starting ##
+
+```bash
+# Clone this project
+$ git clone https://github.com/cpjet64/scavengersue4supporttool
+
+# Access
+$ cd scavengersue4supporttool
+
+# Install dependencies
+$ yarn
+
+# Run the project
+$ yarn start
+
+# The server will initialize in the <http://localhost:3000>
+```
+
+## :memo: License ##
+
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+
+
+Made with :heart: by <a href="https://github.com" target="_blank">{{YOUR_NAME}}</a>
+
+&#xa0;
+
+<a href="#top">Back to top</a>
