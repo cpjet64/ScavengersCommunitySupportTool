@@ -49,19 +49,20 @@
 
 ## About ##
 
-This software is free and open source. If you have any questions please contact Cpjet64#5663 via Discord.
-If you were helped by this software please Star this repository! 
-  <img src="./starmyrepo.jpg" alt="Star Me!" />
+This software is free and open source. This software is designed to help people having crashing or performance issues with the game Scavengers. If you have any questions or suggestions, please contact Cpjet64#5663 via Discord.
+
+If you were helped by this software please make sure to Star this repository in the top right corner of the page! 
+<img src="./starmyrepo.jpg" alt="Star Me!" />
 <a href="#top">Return to Top</a>
 
 ## Antivirus ##
 **False Positive Alert**
-Due to the way I am packaging the Community Support Tool some AntiVirus software will flag it as malicious.
+Due to the way I am packaging the Community Support Tool some AntiVirus software will flag it as malicious even though its not.
 If your antivirus flags it you will have to either disable your antivirus temporarily to use the tool or allow the ScavengersCST.exe as a exception. 
 The entire source of the tool is available in this repository I encourage everyone to read through it if you have concerns. 
 As long as you download the tool directly from this github page you are fine. 
 I encourage you to compare the filehashes I generate when I package the tool to verify their authenticity the hashes are located with the releases. 
-**If you downloaded the tool from anywhere other than here please immediately delete it run a virus scan and contact Cpjet64#5663 via discord.**
+**If you downloaded the tool from anywhere other than here please immediately delete it run a virus scan and contact Cpjet64#5663 via Discord.**
 
 <a href="#top">Return to Top</a>
 

@@ -72,7 +72,7 @@ function UsernameInput {
 function UploadtoDiscord
 {
   $discordusername = Get-Content -Path "$env:temp\SCSTDiscord.txt"
-  $Uri = $TestUri
+  $Uri = $OfficialUri
   $content = @"
 
 $discordusername Submitted this $uploadtype log file.
