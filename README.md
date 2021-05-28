@@ -106,14 +106,14 @@ Before starting you must ensure you have installed the latest Windows Updates to
 
 ## What and Where ##
 
-######This tool will create the following files on your computer:  
+###### This tool will create the following files on your computer:  
 
 (These files are created and deleted automatically)  
 %localappdata%\Temp\SCSTInfo.log (This file contains the PC information)
 %localappdata%\Temp\SCSTRepair.log (This file containts the PC information and the repair tool logs)
 %localappdata%\Temp\SCSTDiscord.txt (This file contains the Discord username you were prompted to enter when you selected Data Collector or Repair)
 
-######This tool will download and install the following files on your computer:  
+###### This tool will download and install the following files on your computer:  
 
 (Not including the parts of Windows that will be automatically installed by Windows to allow you to run the tool if they are missing)  
 (The downloaded installers will be deleted automatically once they are done runnning)  
