@@ -1,0 +1,38 @@
+﻿
+This Hash file was generated on 20210528T0208387874Z by Cpjet64 for the file named ScavengersCST.exe
+
+Algorithm Hash                            
+--------- ----                            
+MD5       8ABDC6D7E6AC3BB82DBBA81D0228D061
+
+
+
+Algorithm Hash                                    
+--------- ----                                    
+SHA1      716997DD34A17F487642529FCCEF8253CB844BD2
+
+
+
+Algorithm Hash                                                            
+--------- ----                                                            
+SHA256    EF49B333729C0BB003037D9CAB1AA86DA9259D34122BA5493DF9C9F210BF1DF6
+
+
+
+Algorithm Hash                                                                                                                            
+--------- ----                                                                                                                            
+SHA512    887DFC3E6487264F04BAF5118E11ED3013E4FB8B047FC18E4E60BBC2DF39268DC6396FCE0550E9F14AE32A50105AB449AF19CF1A440A40E27912443CCD74421F
+
+
+
+Algorithm    Hash            
+---------    ----            
+MACTRIPLEDES A6B46B62016348DD
+
+
+
+Algorithm Hash                                    
+--------- ----                                    
+RIPEMD160 C55600A2AC391EC8EFBD48EF87A0F752125B9129
+
+
