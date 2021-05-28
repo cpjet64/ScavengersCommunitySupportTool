@@ -56,7 +56,7 @@ If you were helped by this software please make sure to Star this repository in 
 <a href="#top">Return to Top</a>
 
 ## Antivirus ##
-**False Positive Alert**
+**False Positive Alert**  
 Due to the way I am packaging the Community Support Tool some AntiVirus software will flag it as malicious even though its not.
 If your antivirus flags it you will have to either disable your antivirus temporarily to use the tool or allow the ScavengersCST.exe as a exception. 
 The entire source of the tool is available in this repository I encourage everyone to read through it if you have concerns. 
