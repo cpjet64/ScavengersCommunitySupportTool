@@ -132,6 +132,7 @@ If you would like to request a copy of the data transmitted please contact one o
 Moderation Staff in the Official Discord of Scavengers and provide the Discord username you used when the tool requested it.
 
 #### Data collected:  
+
 CPU - Name, MaxClockSpeed, SocketDesignation, Manufacturer  
 GPU - Name, CurrentHorizontalResolution, CurrentVerticalResolution, CurrentRefreshRate, AdapterRam, DriverDate, DriverVersion  
 RAM/MEMORY - Manufacturer, PartNumber, Speed, DeviceLocator  
