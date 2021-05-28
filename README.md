@@ -6,7 +6,7 @@
   <!-- <a href="https://scavengersue4supporttool.netlify.app">Demo</a> -->
 </div>
 
-<h1 align="center">ScavengersUE4SupportTool</h1>
+<h1 align="center">Scavengers Community Support Tool</h1>
 
 <p align="center">
  <!-- <img alt="Github top language" src="https://img.shields.io/github/languages/top/cpjet64/ScavengersCommunitySupportTool?color=56BEB8"> -->
@@ -37,8 +37,8 @@
   <a href="#antivirus">Antivirus</a> &#xa0; | &#xa0; 
   <a href="#features">Features</a> &#xa0; | &#xa0;
   <a href="#release">Download</a> &#xa0; | &#xa0;
-  <a href="#usage">How To Use</a> &#xa0; | &#xa0;
   <a href="#requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#usage">How To Use</a> &#xa0; | &#xa0;
   <a href="#what and where">What and Where</a> &#xa0; | &#xa0;
   <a href="#privacy">Privacy</a> &#xa0; | &#xa0;
   <a href="#license">License</a> &#xa0; | &#xa0;
@@ -50,7 +50,8 @@
 ## About ##
 
 This software is free and open source. If you have any questions please contact Cpjet64#5663 via Discord.
-
+If you were helped by this software please Star this repository! 
+  <img src="./starmyrepo.jpg" alt="Star Me!" />
 <a href="#top">Return to Top</a>
 
 ## Antivirus ##
@@ -79,6 +80,12 @@ Download the latest release from https://github.com/cpjet64/ScavengersUE4Support
 
  <a href="#top">Return to Top</a>
 
+## Requirements ##
+
+Before starting you must ensure you have installed the latest Windows Updates to include Cumulative and Optional updates.
+
+<a href="#top">Return to Top</a>
+
 ## Usage ##
 
  1. Start the ScavengersCST.exe file, you will be presented with a User Account Control (UAC) popup asking if you want to allow the program to make changes to your computer. Make sure to select YES.
@@ -93,12 +100,6 @@ Download the latest release from https://github.com/cpjet64/ScavengersUE4Support
  
  4. Wait for the tool to finish. 
     * Please note if you clicked the Repair button **_your computer will automatically restart after you click OK_** when the tool is finished.
-
-<a href="#top">Return to Top</a>
-
-## Requirements ##
-
-Before starting you must ensure you have installed the latest Windows Updates to include Cumulative and Optional updates.
 
 <a href="#top">Return to Top</a>
 
