@@ -9,19 +9,19 @@
 <h1 align="center">ScavengersUE4SupportTool</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/{{cpjet64}}/scavengersue4supporttool?color=56BEB8">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/{{cpjet64}}/scavengersue4supporttool/tree/DEV?color=56BEB8">
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/{{cpjet64}}/scavengersue4supporttool?color=56BEB8">
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/{{cpjet64}}/scavengersue4supporttool/tree/DEV?color=56BEB8">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{cpjet64}}/scavengersue4supporttool?color=56BEB8">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{cpjet64}}/scavengersue4supporttool/tree/DEV?color=56BEB8">
 
-  <img alt="License" src="https://img.shields.io/github/license/{{cpjet64}}/scavengersue4supporttool?color=56BEB8">
+  <img alt="License" src="https://img.shields.io/github/license/{{cpjet64}}/scavengersue4supporttool/tree/DEV?color=56BEB8">
 
-  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{cpjet64}}/scavengersue4supporttool?color=56BEB8" /> -->
+  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{cpjet64}}/scavengersue4supporttool/tree/DEV?color=56BEB8" /> -->
 
-  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/{{cpjet64}}/scavengersue4supporttool?color=56BEB8" /> -->
+  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/{{cpjet64}}/scavengersue4supporttool/tree/DEV?color=56BEB8" /> -->
 
-  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/{{cpjet64}}/scavengersue4supporttool?color=56BEB8" /> -->
+  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/{{cpjet64}}/scavengersue4supporttool/tree/DEV?color=56BEB8" /> -->
 </p>
 
 <!-- Status -->
