@@ -9,7 +9,8 @@
 'CloseButton.Name' = 'CloseButton'
 'SafetyLabel.Name' = 'SafetyLabel'
 'GithubLabel.Name' = 'GithubLabel'
-'PrivacyWarningLabel1.Name' = 'PrivacyWarningLabel1'
+'PrivacyWarningLabel.Name' = 'PrivacyWarningLabel'
+'PrivacyWarningLabel.Text' = 'WARNING: This software will collect and transmit data through Discord to the Devs and Support Team to assist with troubleshooting your PC and tracking the crash reason. To learn more about what is collected and transmitted please check the GitHub link mentioned above.  Checking the box below means you allow the abovementioned to utilize, store, transmit the collected data in order to repair and prevent issues in relations to the Scavengers Game.'
+'ResetAppDataButton.Name' = 'ResetAppDataButton'
 '$this.Name' = 'LauncherWindow'
-'PrivacyWarningLabel1.Text' = 'WARNING: This software will collect and transmit data through Discord to the Devs and Support Team to assist with troubleshooting your PC and tracking the crash reason. To learn more about what is collected and transmitted please check the GitHub link mentioned above.  Checking the box below means you allow the abovementioned to utilize, store, transmit the collected data in order to repair and prevent issues in relations to the Scavengers Game.'
 }

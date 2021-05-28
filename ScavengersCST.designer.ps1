@@ -9,7 +9,8 @@ $LauncherWindow = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Button]$CloseButton = $null
 [System.Windows.Forms.Label]$SafetyLabel = $null
 [System.Windows.Forms.Label]$GithubLabel = $null
-[System.Windows.Forms.Label]$PrivacyWarningLabel1 = $null
+[System.Windows.Forms.Label]$PrivacyWarningLabel = $null
+[System.Windows.Forms.Button]$ResetAppDataButton = $null
 function InitializeComponent
 {
 $resources = . (Join-Path $PSScriptRoot 'scavengerscst.resources.ps1')
@@ -23,12 +24,13 @@ $VersionLabel = (New-Object -TypeName System.Windows.Forms.Label)
 $CloseButton = (New-Object -TypeName System.Windows.Forms.Button)
 $SafetyLabel = (New-Object -TypeName System.Windows.Forms.Label)
 $GithubLabel = (New-Object -TypeName System.Windows.Forms.Label)
-$PrivacyWarningLabel1 = (New-Object -TypeName System.Windows.Forms.Label)
+$PrivacyWarningLabel = (New-Object -TypeName System.Windows.Forms.Label)
+$ResetAppDataButton = (New-Object -TypeName System.Windows.Forms.Button)
 $LauncherWindow.SuspendLayout()
 #
 #DataCollectorButton
 #
-$DataCollectorButton.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]74,[System.Int32]308))
+$DataCollectorButton.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]308))
 $DataCollectorButton.Name = [System.String]'DataCollectorButton'
 $DataCollectorButton.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]97,[System.Int32]23))
 $DataCollectorButton.TabIndex = [System.Int32]1
@@ -42,7 +44,7 @@ $DataCollectorButton.add_Click($DataCollectorButton_Click)
 #
 #RepairToolButton
 #
-$RepairToolButton.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]192,[System.Int32]308))
+$RepairToolButton.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]250,[System.Int32]308))
 $RepairToolButton.Name = [System.String]'RepairToolButton'
 $RepairToolButton.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]97,[System.Int32]23))
 $RepairToolButton.TabIndex = [System.Int32]2
@@ -73,7 +75,7 @@ $UnofficialToolLabel.Location = (New-Object -TypeName System.Drawing.Point -Argu
 $UnofficialToolLabel.Name = [System.String]'UnofficialToolLabel'
 $UnofficialToolLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]335,[System.Int32]92))
 $UnofficialToolLabel.TabIndex = [System.Int32]7
-$UnofficialToolLabel.Text = [System.String]'This is a UNOFFICIAL tool created by the community for the community. This tool is NOT supported by the game''s developer.'
+$UnofficialToolLabel.Text = [System.String]'This is a UNOFFICIAL tool created by the community for the community. This tool is NOT supported by the games developer.'
 $UnofficialToolLabel.TextAlign = [System.Drawing.ContentAlignment]::TopCenter
 $UnofficialToolLabel.UseCompatibleTextRendering = $true
 #
@@ -104,7 +106,7 @@ $VersionLabel.Location = (New-Object -TypeName System.Drawing.Point -ArgumentLis
 $VersionLabel.Name = [System.String]'VersionLabel'
 $VersionLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]26,[System.Int32]14))
 $VersionLabel.TabIndex = [System.Int32]10
-$VersionLabel.Text = [System.String]'v1.3'
+$VersionLabel.Text = [System.String]'v1.4'
 $VersionLabel.UseCompatibleTextRendering = $true
 #
 #CloseButton
@@ -140,21 +142,33 @@ $GithubLabel.Text = [System.String]'https://github.com/cpjet64/ScavengersUE4Supp
 $GithubLabel.TextAlign = [System.Drawing.ContentAlignment]::TopCenter
 $GithubLabel.UseCompatibleTextRendering = $true
 #
-#PrivacyWarningLabel1
+#PrivacyWarningLabel
 #
-$PrivacyWarningLabel1.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]127))
-$PrivacyWarningLabel1.Name = [System.String]'PrivacyWarningLabel1'
-$PrivacyWarningLabel1.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]335,[System.Int32]132))
-$PrivacyWarningLabel1.TabIndex = [System.Int32]17
-$PrivacyWarningLabel1.Text = [System.String]$resources.'PrivacyWarningLabel1.Text'
-$PrivacyWarningLabel1.TextAlign = [System.Drawing.ContentAlignment]::MiddleCenter
-$PrivacyWarningLabel1.UseCompatibleTextRendering = $true
+$PrivacyWarningLabel.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]12,[System.Int32]127))
+$PrivacyWarningLabel.Name = [System.String]'PrivacyWarningLabel'
+$PrivacyWarningLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]335,[System.Int32]132))
+$PrivacyWarningLabel.TabIndex = [System.Int32]17
+$PrivacyWarningLabel.Text = [System.String]$resources.'PrivacyWarningLabel.Text'
+$PrivacyWarningLabel.TextAlign = [System.Drawing.ContentAlignment]::MiddleCenter
+$PrivacyWarningLabel.UseCompatibleTextRendering = $true
+#
+#ResetAppDataButton
+#
+$ResetAppDataButton.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]136,[System.Int32]308))
+$ResetAppDataButton.Name = [System.String]'ResetAppDataButton'
+$ResetAppDataButton.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]88,[System.Int32]23))
+$ResetAppDataButton.TabIndex = [System.Int32]18
+$ResetAppDataButton.Text = [System.String]'Reset Graphics'
+$ResetAppDataButton.UseCompatibleTextRendering = $true
+$ResetAppDataButton.UseVisualStyleBackColor = $true
+$ResetAppDataButton.add_Click($ResetAppDataButton_Click)
 #
 #LauncherWindow
 #
 $LauncherWindow.ClientSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]359,[System.Int32]386))
 $LauncherWindow.ControlBox = $false
-$LauncherWindow.Controls.Add($PrivacyWarningLabel1)
+$LauncherWindow.Controls.Add($ResetAppDataButton)
+$LauncherWindow.Controls.Add($PrivacyWarningLabel)
 $LauncherWindow.Controls.Add($GithubLabel)
 $LauncherWindow.Controls.Add($SafetyLabel)
 $LauncherWindow.Controls.Add($CloseButton)
@@ -186,6 +200,7 @@ Add-Member -InputObject $LauncherWindow -Name VersionLabel -Value $VersionLabel 
 Add-Member -InputObject $LauncherWindow -Name CloseButton -Value $CloseButton -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name SafetyLabel -Value $SafetyLabel -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name GithubLabel -Value $GithubLabel -MemberType NoteProperty
-Add-Member -InputObject $LauncherWindow -Name PrivacyWarningLabel1 -Value $PrivacyWarningLabel1 -MemberType NoteProperty
+Add-Member -InputObject $LauncherWindow -Name PrivacyWarningLabel -Value $PrivacyWarningLabel -MemberType NoteProperty
+Add-Member -InputObject $LauncherWindow -Name ResetAppDataButton -Value $ResetAppDataButton -MemberType NoteProperty
 }
 . InitializeComponent
