@@ -1,6 +1,6 @@
 @{
     Root = 'c:\GITHUBREPOS\ScavengersUE4SupportTool\ScavengersCST.ps1'
-    OutputPath = 'c:\GITHUBREPOS\ScavengersUE4SupportTool\out'
+    OutputPath = 'c:\GITHUBREPOS\ScavengersUE4SupportTool\compiled'
     Package = @{
         Enabled = $true
         Obfuscate = $true
