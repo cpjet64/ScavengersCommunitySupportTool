@@ -68,7 +68,7 @@ I encourage you to compare the filehashes I generate when I package the tool to 
 
 ## Release ##
 
-Download the latest release from https://github.com/cpjet64/ScavengersUE4SupportTool/releases
+Download the latest release from https://github.com/cpjet64/ScavengersUE4SupportTool/releases/latest
 
 <a href="#top">Return to Top</a>
 
