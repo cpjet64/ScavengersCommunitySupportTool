@@ -13,6 +13,7 @@ $LauncherWindow = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Button]$ResetAppDataButton = $null
 function InitializeComponent
 {
+$version = [System.String]'v1.4.1'
 $resources = . (Join-Path $PSScriptRoot 'scavengerscst.resources.ps1')
 $DataCollectorButton = (New-Object -TypeName System.Windows.Forms.Button)
 $RepairToolButton = (New-Object -TypeName System.Windows.Forms.Button)
@@ -106,7 +107,7 @@ $VersionLabel.Location = (New-Object -TypeName System.Drawing.Point -ArgumentLis
 $VersionLabel.Name = [System.String]'VersionLabel'
 $VersionLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]26,[System.Int32]14))
 $VersionLabel.TabIndex = [System.Int32]10
-$VersionLabel.Text = [System.String]'v1.4'
+$VersionLabel.Text = $version
 $VersionLabel.UseCompatibleTextRendering = $true
 #
 #CloseButton

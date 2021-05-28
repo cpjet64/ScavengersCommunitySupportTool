@@ -1,4 +1,7 @@
-﻿$ResetAppDataButton_Click = {
+﻿##
+#SCST v1.4.1
+##
+$ResetAppDataButton_Click = {
   LocalAppDataRename
 }
 $LauncherWindow_Load = {
