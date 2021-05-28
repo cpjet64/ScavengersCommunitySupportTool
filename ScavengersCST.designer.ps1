@@ -154,9 +154,9 @@ $PrivacyWarningLabel.UseCompatibleTextRendering = $true
 #
 #ResetAppDataButton
 #
-$ResetAppDataButton.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]136,[System.Int32]308))
+$ResetAppDataButton.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]132,[System.Int32]308))
 $ResetAppDataButton.Name = [System.String]'ResetAppDataButton'
-$ResetAppDataButton.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]88,[System.Int32]23))
+$ResetAppDataButton.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]97,[System.Int32]23))
 $ResetAppDataButton.TabIndex = [System.Int32]18
 $ResetAppDataButton.Text = [System.String]'Reset Graphics'
 $ResetAppDataButton.UseCompatibleTextRendering = $true

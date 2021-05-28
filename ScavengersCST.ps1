@@ -19,15 +19,15 @@ $RepairToolButton_Click = {
   CollectInfo -Wait
   Repair -Wait
   Start-Sleep 1
-  Write-Output "Now collecting and uploading our log files to Discord"
+  Write-Host "Now collecting and uploading our log files to Discord"
   Set-Variable -Name "logfiletoupload" -Value "$scstinfo"
   UploadtoDiscord -Wait
   Set-Variable -Name "logfiletoupload" -Value "$scstrepair"
   UploadtoDiscord -Wait
-  Write-Output "Uploading to Discord finished"
-  Write-Output "Now cleaning up the log files"
+  Write-Host "Uploading to Discord finished"
+  Write-Host "Now cleaning up the log files"
   Cleanup -Wait
-  Write-Output "Finished cleaning up the log files"
+  Write-Host "Finished cleaning up the log files"
   Restart
   $CloseButton.Enabled = $true
   $RepairToolButton.Enabled = $true
@@ -45,11 +45,11 @@ $DataCollectorButton_Click = {
   CollectInfo -Wait
   Start-Sleep 1
   Set-Variable -Name "logfiletoupload" -Value "$scstinfo"
-  Write-Output "Now collecting and uploading our log files to Discord"
+  Write-Host "Now collecting and uploading our log files to Discord"
   UploadtoDiscord -Wait
-  Write-Output "Uploading to Discord finished"
+  Write-Host "Uploading to Discord finished"
   Cleanup -Wait
-  Write-Output "Data collection complete you may now continue..."
+  Write-Host "Data collection complete you may now continue..."
   $CloseButton.Enabled = $true
   $RepairToolButton.Enabled = $true
   $DataCollectorButton.Enabled = $true
@@ -112,7 +112,7 @@ function Cleanup
 }
 function CollectInfo
 {
-  Write-Output "Data Collection Process Starting"
+  Write-Host "Data Collection Process Starting"
   if (Test-Path $scstinfo) {Remove-Item -Path "$scstinfo"}
   else {New-Item "$env:temp\SCSTInfo.log"}
   Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsHardwareAbstractionLayer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Force
@@ -121,41 +121,41 @@ function CollectInfo
   Get-CimInstance -ClassName CIM_PhysicalMemory | Format-Table -AutoSize Manufacturer,PartNumber,Speed,DeviceLocator,@{ Name = "CapacityGB"; Expression = { [int]($_.Capacity / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
   Get-CimInstance -ClassName CIM_DiskDrive | Format-Table -AutoSize DeviceID,Model,@{ Name = "SizeGB"; Expression = { [int]($_.Size / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
   Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID,@{ Name = "SizeGB"; Expression = { [int]($_.Size / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-  Write-Output "Data Collection Process Finished"
+  Write-Host "Data Collection Process Finished"
 }
 function Repair
 {
-  Write-Output "Repair Process Starting"
+  Write-Host "Repair Process Starting"
   if (Test-Path "$dismlog") {}
   else { New-Item "$dismlog" }
-  Write-Output "Now running the Windows System File Checker"
+  Write-Host "Now running the Windows System File Checker"
   Start-Process -FilePath "$env:SystemRoot\System32\sfc.exe" -ArgumentList "/scannow" -Wait -NoNewWindow
-  Write-Output "Now running the Windows DISM Tool"
+  Write-Host "Now running the Windows DISM Tool"
   Start-Process -FilePath "$env:SystemRoot\System32\Dism.exe" -ArgumentList "/Online /Cleanup-Image /RestoreHealth /LogPath:$dismlog" -Wait -NoNewWindow
   $sourcedirectx = "https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe"
   $destinationdirectx = "$env:TEMP\directx_Jun2010_redist.exe"
-  Write-Output "Now downloading the latest DirectX Redistributable From Microsoft"
+  Write-Host "Now downloading the latest DirectX Redistributable From Microsoft"
   Invoke-WebRequest -Uri $sourcedirectx -OutFile "$destinationdirectx"
   $sourcevcredisx86 = "https://aka.ms/vs/16/release/vc_redist.x86.exe"
   $destinationvcredisx86 = "$env:TEMP\vc_redist.x86.exe"
-  Write-Output "Now downloading the latest Visual C+++ 32bit Redistributable From Microsoft"
+  Write-Host "Now downloading the latest Visual C+++ 32bit Redistributable From Microsoft"
   Invoke-WebRequest -Uri $sourcevcredisx86 -OutFile "$destinationvcredisx86"
   $sourcevcredisx64 = "https://aka.ms/vs/16/release/vc_redist.x64.exe"
   $destinationvcredisx64 = "$env:TEMP\vc_redist.x64.exe"
-  Write-Output "Now downloading the latest Visual C+++ 64bit Redistributable From Microsoft"
+  Write-Host "Now downloading the latest Visual C+++ 64bit Redistributable From Microsoft"
   Invoke-WebRequest -Uri $sourcevcredisx64 -OutFile "$destinationvcredisx64"
-  Write-Output "Now unpacking and installing the DirectX Redistributable"
+  Write-Host "Now unpacking and installing the DirectX Redistributable"
   $dxsetup = "$env:TEMP\DirectXInstaller\DXSETUP.exe"
   if (Test-Path -Path "$env:TEMP\DirectXInstaller") {Remove-Item -Path "$env:TEMP\DirectXInstaller" -Recurse
     Start-Process -FilePath "$destinationdirectx" -ArgumentList "/Q /T:$env:TEMP\DirectXInstaller\" -Wait
     Start-Process -FilePath "$dxsetup" -ArgumentList "/silent" -Wait}
   else { Start-Process -FilePath "$destinationdirectx" -ArgumentList "/Q /T:$env:TEMP\DirectXInstaller\" -Wait
     Start-Process -FilePath "$dxsetup" -ArgumentList "/silent" -Wait }
-  Write-Output "Now installing the Visual C+++ 32bit Redistributable"
+  Write-Host "Now installing the Visual C+++ 32bit Redistributable"
   Start-Process -FilePath "$destinationvcredisx86" -ArgumentList "/install /quiet /norestart" -Wait
-  Write-Output "Now installing the Visual C+++ 64bit Redistributable"
+  Write-Host "Now installing the Visual C+++ 64bit Redistributable"
   Start-Process -FilePath "$destinationvcredisx64" -ArgumentList "/install /quiet /norestart" -Wait
-  Write-Output "Now deleting all of the installers we just downloaded and ran"
+  Write-Host "Now deleting all of the installers we just downloaded and ran"
   Remove-Item -Path "$destinationdirectx"
   Remove-Item -Path "$env:TEMP\DirectXInstaller" -Recurse
   Remove-Item -Path "$destinationvcredisx86"
@@ -163,14 +163,14 @@ function Repair
   if (Test-Path $env:TEMP\SCSTRepair.log) {Remove-Item -Path "$env:TEMP\SCSTRepair.log"}
   else {New-Item "$env:TEMP\SCSTRepair.log"}
   $scstrepair = "$env:TEMP\SCSTRepair.log"
-  Write-Output "Now building our log file"
+  Write-Host "Now building our log file"
   Add-Content -Path "$scstrepair" -Value "`r`nSFC LOG BEGINS HERE" -Encoding utf8
   $sr = Get-Content c:\windows\Logs\CBS\CBS.log | Where-Object { $_.Contains("[SR]") } | Select-Object -Property @{ Name = "LastCheckDate"; Expression = { $_.substring(0,10) } } -Last 1
   Get-Content c:\windows\Logs\CBS\CBS.log | Where-Object { $_.Contains("[SR]") -and $_.Contains($sr.lastcheckdate) } | Select-String -NotMatch "Verify complete","Verifying","Beginning Verify and Repair" | Out-File -FilePath "$scstrepair" -Encoding utf8 -Append
   Add-Content -Path "$scstrepair" -Value "`r`nDISM LOG BEGINS HERE" -Encoding UTF8
   $getdismlog = Get-Content -Path "$env:TEMP\SCSTDISM.log"
   Add-Content -Path "$scstrepair" -Value "$getdismlog" -Encoding UTF8
-  Write-Output "Repair Process Finished."
+  Write-Host "Repair Process Finished."
 }
 function Restart
 {
