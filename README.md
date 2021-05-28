@@ -107,6 +107,7 @@ Before starting you must ensure you have installed the latest Windows Updates to
 ## What and Where ##
 
 #####This tool will create the following files on your computer:  
+
 (These files are created and deleted automatically)  
 %localappdata%\Temp\SCSTInfo.log (This file contains the PC information)
 %localappdata%\Temp\SCSTRepair.log (This file containts the PC information and the repair tool logs)
