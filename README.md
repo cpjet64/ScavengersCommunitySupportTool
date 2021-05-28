@@ -115,9 +115,9 @@ Before starting you must ensure you have installed the latest Windows Updates to
 #####This tool will download and install the following files on your computer:  
 (Not including the parts of Windows that will be automatically installed by Windows to allow you to run the tool if they are missing)  
 (The downloaded installers will be deleted automatically once they are done runnning)  
-<a href="https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe" target="_blank">DirectX Redistributable from Microsoft</a>
-<a href="https://aka.ms/vs/16/release/vc_redist.x86.exe" target="_blank">Visual C++ 32Bit x86 Redistributable from Microsoft</a>
-<a href="https://aka.ms/vs/16/release/vc_redist.x64.exe" target="_blank">Visual C++ 64bit x64 Redistributable from Microsoft</a>
+<a href="https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe" target="_blank">DirectX Redistributable from Microsoft</a>  
+<a href="https://aka.ms/vs/16/release/vc_redist.x86.exe" target="_blank">Visual C++ 32Bit x86 Redistributable from Microsoft</a>  
+<a href="https://aka.ms/vs/16/release/vc_redist.x64.exe" target="_blank">Visual C++ 64bit x64 Redistributable from Microsoft</a>  
 
 <a href="#top">Return to Top</a>
 
