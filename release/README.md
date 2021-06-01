@@ -59,12 +59,9 @@ If you were helped by this software please make sure to Star this repository in 
 **False Positive Alert**  
 Due to the way I am packaging the Community Support Tool some AntiVirus software will flag it as malicious even though its not.
 If your antivirus flags it you will have to either disable your antivirus temporarily to use the tool or allow the ScavengersCST.exe as a exception. 
-The entire source of the tool is available in this repository I encourage everyone to read through it if you have concerns. The only part of the source that is not publicly available for obvious reasons is the API Keys which are housed in seperate resource file.
+The entire source of the tool is available in this repository I encourage everyone to read through it if you have concerns. 
 As long as you download the tool directly from this github page you are fine. 
-I encourage you to compare the filehashes I generate when I package the tool to verify their authenticity the hashes are located with the releases.   
-
-In order to help you do this I have included the hash generating script I use named hashandrelease.ps1.  
-
+I encourage you to compare the filehashes I generate when I package the tool to verify their authenticity the hashes are located with the releases. 
 **If you downloaded the tool from anywhere other than here please immediately delete it run a virus scan and contact Cpjet64#5663 via Discord.**
 
 <a href="#top">Return to Top</a>
@@ -77,12 +74,9 @@ Download the latest release from https://github.com/cpjet64/ScavengersUE4Support
 
 ## Features ##
 
- There are currently six different uses for the tool. Microsoft Updates, Reset AppData, Reset Windows Firewall, Reset Network, Data Collector, and Repair.
- * **Microsoft Updates** button will download and install all available Microsoft Updates excluding Update Previews. This button does not transmit data to Discord.
- * **Reset AppData** button will rename the Scavenger folder located in your localappdata folder. This folder contains the graphics and game settings and cache for the game.  This button does not transmit data to Discord.
- * **Reset Windows Firewall** button will reset your Windows Firewall to the DEFAULT settings. This button does not transmit data to Discord.
- * **Reset Network** button will perform a full reset of your network adapters.  This button does not transmit data to Discord.
+ There are currently three different uses for the tool. Data Collection, Reset Graphics, and Repair.
  * **Data Collection** button will gather basic system data listed at the end of this readme and send it directly to the Official Scavengers Discord for the support team and developers to analyze.
+ * **Reset Graphics** button will rename the Scavenger folder located in your localappdata folder. This folder contains the graphics and game settings and cache for the game. This button does not transmit data.
  * **Repair** button will run several included with Windows repair programs and update your Visual C++ and DirectX redistributables and will also gather basic system data listed at the end of this readme and send it directly to the Official Scavengers Discord for the support team and developers to analyze.
 
  <a href="#top">Return to Top</a>
@@ -114,13 +108,9 @@ Before starting you must ensure you have installed the latest Windows Updates to
 
 #### This tool will create the following files on your computer:  
 (These files are created and deleted automatically)  
-
-%localappdata%\Temp\SCSTInfo.log  
-(This file contains the PC information)  
-
-%localappdata%\Temp\SCSTRepair.log  
-(This file containts the PC information and the repair tool logs)
-
+%localappdata%\Temp\SCSTInfo.log (This file contains the PC information)
+%localappdata%\Temp\SCSTRepair.log (This file containts the PC information and the repair tool logs)
+%localappdata%\Temp\SCSTDiscord.txt (This file contains the Discord username you were prompted to enter when you selected Data Collector or Repair)
 
 #### This tool will download and install the following files on your computer:  
 
@@ -129,8 +119,6 @@ Before starting you must ensure you have installed the latest Windows Updates to
 <a href="https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe" target="_blank">DirectX Redistributable from Microsoft</a>  
 <a href="https://aka.ms/vs/16/release/vc_redist.x86.exe" target="_blank">Visual C++ 32Bit x86 Redistributable from Microsoft</a>  
 <a href="https://aka.ms/vs/16/release/vc_redist.x64.exe" target="_blank">Visual C++ 64bit x64 Redistributable from Microsoft</a>  
-<a href="https://docs.microsoft.com/en-us/powershell/module/packagemanagement/install-packageprovider?view=powershell-7.1#example-2--install-a-specified-version-of-a-package-provider" target="_blank">Nuget Package Provider</a>  This is for downloading Microsoft Updates  
-<a href="https://www.powershellgallery.com/packages/PSWindowsUpdate/2.2.0.2" target="_blank">PSWindowsUpdate</a>  This is also for downloading Microsoft Updates
 
 <a href="#top">Return to Top</a>
 

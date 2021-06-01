@@ -20,4 +20,15 @@ Get-FileHash .\compiled\ScavengersCST.exe -Algorithm RIPEMD160 | Format-Table -A
 
 Rename-Item -Path .\"FileHashes.txt" -NewName .\"FileHashes$version.txt"
 
-Move-Item -Path .\"FileHashes$version.txt" -Destination .\compiled\"FileHashes$version.txt"
+if (Test-Path -Path .\release\"LICENSE.md") {Remove-Item -Path .\release\"LICENSE.md"}
+else {Copy-Item .\"LICENSE.md" -Destination .\release\"LICENSE.md"}
+
+if (Test-Path -Path .\release\"README.md") {Remove-Item -Path .\release\"README.md"}
+else {Copy-Item .\"README.md" -Destination .\release\"README.md"}
+
+if (Test-Path -Path .\release\"ScavengersCST.exe") {Remove-Item -Path .\release\"ScavengersCST.exe"}
+else {Copy-Item .\compiled\"ScavengersCST.exe" -Destination .\release\"ScavengersCST.exe"}
+
+Remove-Item .\release\FileHashes*.txt
+
+Move-Item -Path .\"FileHashes$version.txt" -Destination .\release\"FileHashes$version.txt"
