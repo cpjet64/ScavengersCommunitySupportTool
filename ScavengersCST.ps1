@@ -43,7 +43,6 @@ $AcceptCheckbox_CheckedChanged = {
 ###
 #Variables
 ###
-$version = [System.String]'v1.5.0'
 $scavlocal = "$env:LOCALAPPDATA\Scavenger"
 $scavlocalnewname = "$env:LOCALAPPDATA\ScavengerBAK$(get-date -format yyyymmdd-hhmm)"
 $scstinfo = "$env:temp\SCSTInfo.log"
@@ -55,7 +54,7 @@ $directxunpack = "$env:TEMP\DirectXInstaller\"
 $dxsetup = "$env:TEMP\DirectXInstaller\DXSETUP.exe"
 $destinationvcredisx86 = "$env:TEMP\vc_redist.x86.exe"
 $destinationvcredisx64 = "$env:TEMP\vc_redist.x64.exe"
-$zippedlogs = "$env:temp\SCSTRepair.Zip"
+$zippedlogs = "$env:temp\SCSTBigLogs.Zip"
 $sourcedirectx = "https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe"
 $sourcevcredisx86 = "https://aka.ms/vs/16/release/vc_redist.x86.exe"
 $sourcevcredisx64 = "https://aka.ms/vs/16/release/vc_redist.x64.exe"
@@ -92,10 +91,7 @@ function RepairWaitWarningForm{
 }
 function MSUpdate{
   $msupdatelog = "$env:USERPROFILE\Desktop\MSUpdates.log"
-  
-  if (Test-Path "$msupdatelog") {}
-  else {New-Item $msupdatelog}
-  Add-Content -Path "$msupdatelog" -Value "`r`nMSUPDATE STARTS HERE EACH RUN" -Encoding utf8
+  Add-Content -Path "$msupdatelog" -Value "`r`nMSUPDATE STARTS HERE EACH RUN" -Encoding UTF8
   write-host "Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.201 -Force"
   Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.201 -Force
   write-host "Set-PSRepository PSGallery -InstallationPolicy Trusted"
@@ -110,10 +106,13 @@ function MSUpdate{
   Add-WUServiceManager -MicrosoftUpdate -Confirm:$false
   write-host "Get-WindowsUpdate -MicrosoftUpdate -NotTitle 'Preview'"
   Get-WindowsUpdate -MicrosoftUpdate -NotTitle "Preview" 
-  write-host "Install-WindowsUpdate -MicrosoftUpdate -NotTitle 'Preview' -AcceptAll -IgnoreReboot | Select-Object -Property Result,KB,Size,Title | Out-File '$msupdatelog' -Append -Encoding utf8"
-  Install-WindowsUpdate -MicrosoftUpdate -NotTitle "Preview" -AcceptAll -IgnoreReboot | Select-Object -Property Result,KB,Size,Title | Out-File "$msupdatelog" -Append -Encoding utf8
+  write-host "Install-WindowsUpdate -MicrosoftUpdate -NotTitle 'Preview' -AcceptAll -IgnoreReboot | Select-Object -Property Result,KB,Size,Title | Out-File '$msupdatelog' -Append -Encoding UTF8"
+  Install-WindowsUpdate -MicrosoftUpdate -NotTitle "Preview" -AcceptAll -IgnoreReboot | Select-Object -Property Result,KB,Size,Title | Out-File "$msupdatelog" -Append -Encoding UTF8
   write-host "Set-PSRepository PSGallery -InstallationPolicy Untrusted"
   Set-PSRepository PSGallery -InstallationPolicy Untrusted
+  Set-Variable uploadtype "MSUpdates"
+  Set-Variable logfiletoupload "$msupdatelog"
+  UploadtoDiscordSmallText -Wait
 }
 
 function ResetNetwork{
@@ -189,19 +188,50 @@ $discordusername Submitted this $uploadtype log file.
   $filePath = (Get-Item $logfiletoupload).FullName
   Submit-TextFile $filePath $Uri
 }
-function UploadtoDiscordZipped{
+function UploadtoDiscordZipped ($filePath, $Uri) {
+$Uri = $TestUri
+#$Uri = $OfficialUri
+    $filename = (Get-ChildItem $filePath).Name
+    $fileBytes = [System.IO.File]::ReadAllBytes($filePath)
+    $filecontents = [System.Text.Encoding]::GetEncoding("ISO-8859-1").GetString($fileBytes)
+    $boundary = [guid]::NewGuid().ToString()
+    $contentinfo = "Content-Disposition: form-data; name=`"file`"; filename=`"$filename`"`n"
+    $contentinfo += "Content-Type: application/x-zip-compressed`n"
+    $contentinfo += "Content-Length: $($filecontents.Length)`n"
+    $body = "--$boundary`n$contentinfo`n$filecontents`n--$boundary--`n"
+    $params = @{
+      Uri         = $Uri
+      Body        = $body
+      Method      = 'Post'
+      ContentType = "multipart/form-data; boundary=$boundary"
+    }
+    Invoke-RestMethod @params | ConvertTo-Json -Depth 99 | Set-Content sf.json
+  }
+  $filePath = (Get-Item $zippedlogs).FullName
+  UploadtoDiscordZipped $filePath $Uri
+}
+function Cleanup{
+  $msgBox =  [System.Windows.MessageBox]::Show("Cleaning up files we download/created please wait until the tool fully closes. Press OK to continue.",'SCST','Ok','Exclamation')
+  if (Test-Path $scstinfo) {Remove-Item -Path "$scstinfo"}
+  if (Test-Path $scstrepair) {Remove-Item -Path "$scstrepair"}
+  if (Test-Path $scstdism) {Remove-Item -Path "$scstdism"}
+  if (Test-Path $destinationdirectx) {Remove-Item -Path "$destinationdirectx"}
+  if (Test-Path $directxunpack) {Remove-Item -Path "$directxunpack" -Recurse}
+  if (Test-Path $destinationvcredisx86) {Remove-Item -Path "$destinationvcredisx86"}
+  if (Test-Path $destinationvcredisx64) {Remove-Item -Path "$destinationvcredisx64"}
+  if (Test-Path $zippedlogs) {Remove-Item -Path "$zippedlogs"}
 }
 function DataCollector{
   Start-Sleep 1
   Write-Host "Data Collection Starting"
   if (Test-Path $scstinfo) {Remove-Item -Path "$scstinfo"}
   else {New-Item "$scstinfo"}
-  Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsHardwareAbstractionLayer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Force
-  Get-CimInstance -ClassName CIM_Processor | Select-Object -Property Name,MaxClockSpeed,SocketDesignation,Manufacturer | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-  Get-CimInstance -ClassName CIM_VideoController | Format-Table -AutoSize -Property Name,@{Name = "CrtHorizontalRes"; Expression = {($_.CurrentHorizontalResolution)}},@{Name = "CrtVerticalRes"; Expression = {($_.CurrentVerticalResolution)}},@{Name = "CrtRefreshRate"; Expression = {($_.CurrentRefreshRate)}},@{Name = "AdapterRamGB"; Expression = {[int]($_.AdapterRam / 1GB)}},DriverVersion | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-  Get-CimInstance -ClassName CIM_PhysicalMemory | Format-Table -AutoSize Manufacturer,PartNumber,Speed,DeviceLocator,@{ Name = "CapacityGB"; Expression = {[int]($_.Capacity / 1GB)}} | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-  Get-CimInstance -ClassName CIM_DiskDrive | Format-Table -AutoSize DeviceID,Model,@{ Name = "SizeGB"; Expression = { [int]($_.Size / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
-  Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID,@{ Name = "SizeGB"; Expression = { [int]($_.Size / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding utf8 -Append
+  Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsHardwareAbstractionLayer | Out-File -FilePath "$scstinfo" -Encoding UTF8 -Force
+  Get-CimInstance -ClassName CIM_Processor | Select-Object -Property Name,MaxClockSpeed,SocketDesignation,Manufacturer | Out-File -FilePath "$scstinfo" -Encoding UTF8 -Append
+  Get-CimInstance -ClassName CIM_VideoController | Format-Table -AutoSize -Property Name,@{Name = "CrtHorizontalRes"; Expression = {($_.CurrentHorizontalResolution)}},@{Name = "CrtVerticalRes"; Expression = {($_.CurrentVerticalResolution)}},@{Name = "CrtRefreshRate"; Expression = {($_.CurrentRefreshRate)}},@{Name = "AdapterRamGB"; Expression = {[int]($_.AdapterRam / 1GB)}},DriverVersion | Out-File -FilePath "$scstinfo" -Encoding UTF8 -Append
+  Get-CimInstance -ClassName CIM_PhysicalMemory | Format-Table -AutoSize Manufacturer,PartNumber,Speed,DeviceLocator,@{ Name = "CapacityGB"; Expression = {[int]($_.Capacity / 1GB)}} | Out-File -FilePath "$scstinfo" -Encoding UTF8 -Append
+  Get-CimInstance -ClassName CIM_DiskDrive | Format-Table -AutoSize DeviceID,Model,@{ Name = "SizeGB"; Expression = { [int]($_.Size / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding UTF8 -Append
+  Get-CimInstance -ClassName CIM_LogicalDisk | Format-Table -AutoSize DeviceID,@{ Name = "SizeGB"; Expression = { [int]($_.Size / 1GB) } } | Out-File -FilePath "$scstinfo" -Encoding UTF8 -Append
   Start-Sleep 1
   Write-Host "Now uploading system info to Discord"
   Set-Variable uploadtype "Info"
@@ -237,20 +267,14 @@ function Repair{
   Start-Process -FilePath "$destinationvcredisx86" -ArgumentList "/install /quiet /norestart" -Wait
   Write-Host "Now installing the Visual C++ 64bit Redistributable"
   Start-Process -FilePath "$destinationvcredisx64" -ArgumentList "/install /quiet /norestart" -Wait
-  Write-Host "Now cleaning up all of the installers we just downloaded and ran"
-  Remove-Item -Path "$destinationdirectx"
-  Remove-Item -Path "$directxunpack" -Recurse
-  Remove-Item -Path "$destinationvcredisx86"
-  Remove-Item -Path "$destinationvcredisx64"
-  Write-Host "Finished cleaning up all of the installers"
   Write-Host "Now building our log file"
   if (Test-Path $scstrepair) {Remove-Item -Path "$scstrepair"}
   else {New-Item "$scstrepair"}
-  Add-Content -Path "$scstrepair" -Value "`r`nSFC LOG BEGINS HERE" -Encoding utf8
+  Add-Content -Path "$scstrepair" -Value "`r`nSFC LOG BEGINS HERE" -Encoding UTF8
   $sr = Get-Content c:\windows\Logs\CBS\CBS.log | Where-Object { $_.Contains("[SR]") } | Select-Object -Property @{ Name = "LastCheckDate"; Expression = { $_.substring(0,10) } } -Last 1
-  Get-Content c:\windows\Logs\CBS\CBS.log | Where-Object { $_.Contains("[SR]") -and $_.Contains($sr.lastcheckdate) } | Select-String -NotMatch "Verify complete","Verifying","Beginning Verify and Repair" | Out-File -FilePath "$scstrepair" -Encoding utf8 -Append
+  Get-Content c:\windows\Logs\CBS\CBS.log | Where-Object { $_.Contains("[SR]") -and $_.Contains($sr.lastcheckdate) } | Select-String -NotMatch "Verify complete","Verifying","Beginning Verify and Repair" | Out-File -FilePath "$scstrepair" -Encoding UTF8 -Append
   Add-Content -Path "$scstrepair" -Value "`r`nDISM LOG BEGINS HERE" -Encoding UTF8
-  $getscstdism = Get-Content -Path "$scstdism"
+  $getscstdism = Get-Content -Raw -Path "$scstdism"
   Add-Content -Path "$scstrepair" -Value "$getscstdism" -Encoding UTF8
   Start-Sleep 1
   DataCollector -Wait
@@ -259,13 +283,10 @@ function Repair{
   Write-Host "Now collecting, compressing, and uploading our repair log files to Discord"
   UploadtoDiscordSmallText -Wait
   Write-Host "Uploading to Discord finished"
-  Write-Host "Now cleaning up the log files"
-  Cleanup -Wait
-  Write-Host "Finished cleaning up the log files"
   Write-Host "Repair Process Finished."
-  #RestartComputer
+  RestartComputer
   $CloseButton.Enabled = $true
-  #$LauncherWindow.Close()
+  $LauncherWindow.Close()
 }
 function Test-PendingReboot{
  if (Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending" -EA Ignore) { return $true }
