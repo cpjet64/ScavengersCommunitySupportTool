@@ -6,7 +6,7 @@
         Obfuscate = $true
         HideConsoleWindow = $false
         DotNetVersion = 'v4.6.2'
-        FileVersion = '1.4.1'
+        FileVersion = '1.5.0'
         FileDescription = 'Made by Cpjet64 and Hunhow'
         ProductName = 'Scavengers Community Support Tool'
         ProductVersion = ''
