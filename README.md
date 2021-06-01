@@ -119,7 +119,10 @@ Before starting you must ensure you have installed the latest Windows Updates to
 (This file contains the PC information)  
 
 %localappdata%\Temp\SCSTRepair.log  
-(This file containts the PC information and the repair tool logs)
+(This file contains the PC information and the repair tool logs)
+
+%userprofile%\desktop\MSUpdates.log  
+(This file contains the updates that you downloaded/installed and it does not delete automatically for your own records)
 
 
 #### This tool will download and install the following files on your computer:  
