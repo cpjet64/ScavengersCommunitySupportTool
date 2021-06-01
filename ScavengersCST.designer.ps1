@@ -5,7 +5,6 @@ $LauncherWindow = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Label]$UnofficialToolLabel = $null
 [System.Windows.Forms.Label]$ClickCheckboxLabel = $null
 [System.Windows.Forms.Label]$AboutMeLabel = $null
-[System.Windows.Forms.Label]$VersionLabel = $null
 [System.Windows.Forms.Button]$CloseButton = $null
 [System.Windows.Forms.Label]$SafetyLabel = $null
 [System.Windows.Forms.Label]$PrivacyWarningLabel = $null
@@ -18,6 +17,7 @@ $LauncherWindow = New-Object -TypeName System.Windows.Forms.Form
 [System.Windows.Forms.Button]$ResetWinFWButton = $null
 function InitializeComponent
 {
+$version = [System.String]'v1.5.0'
 $resources = . (Join-Path $PSScriptRoot 'scavengerscst.resources.ps1')
 $DataCollectorButton = (New-Object -TypeName System.Windows.Forms.Button)
 $RepairToolButton = (New-Object -TypeName System.Windows.Forms.Button)
@@ -25,7 +25,6 @@ $AcceptCheckBox = (New-Object -TypeName System.Windows.Forms.CheckBox)
 $UnofficialToolLabel = (New-Object -TypeName System.Windows.Forms.Label)
 $ClickCheckboxLabel = (New-Object -TypeName System.Windows.Forms.Label)
 $AboutMeLabel = (New-Object -TypeName System.Windows.Forms.Label)
-$VersionLabel = (New-Object -TypeName System.Windows.Forms.Label)
 $CloseButton = (New-Object -TypeName System.Windows.Forms.Button)
 $SafetyLabel = (New-Object -TypeName System.Windows.Forms.Label)
 $PrivacyWarningLabel = (New-Object -TypeName System.Windows.Forms.Label)
@@ -104,21 +103,13 @@ $ClickCheckboxLabel.UseCompatibleTextRendering = $true
 #AboutMeLabel
 #
 $AboutMeLabel.Font = (New-Object -TypeName System.Drawing.Font -ArgumentList @([System.String]'Tahoma',[System.Single]6.75,[System.Drawing.FontStyle]::Regular,[System.Drawing.GraphicsUnit]::Point,([System.Byte][System.Byte]0)))
-$AboutMeLabel.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]100,[System.Int32]388))
+$AboutMeLabel.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]100,[System.Int32]384))
 $AboutMeLabel.Name = [System.String]'AboutMeLabel'
-$AboutMeLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]212,[System.Int32]16))
+$AboutMeLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]212,[System.Int32]18))
 $AboutMeLabel.TabIndex = [System.Int32]9
 $AboutMeLabel.Text = [System.String]'Developed by Cpjet64 and Void_Sentient/Hunhow'
 $AboutMeLabel.TextAlign = [System.Drawing.ContentAlignment]::MiddleCenter
 $AboutMeLabel.UseCompatibleTextRendering = $true
-#
-#VersionLabel
-#
-$VersionLabel.Location = (New-Object -TypeName System.Drawing.Point -ArgumentList @([System.Int32]337,[System.Int32]388))
-$VersionLabel.Name = [System.String]'VersionLabel'
-$VersionLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]60,[System.Int32]14))
-$VersionLabel.TabIndex = [System.Int32]10
-$VersionLabel.UseCompatibleTextRendering = $true
 #
 #CloseButton
 #
@@ -170,8 +161,7 @@ $BeforeUseLabel.Location = (New-Object -TypeName System.Drawing.Point -ArgumentL
 $BeforeUseLabel.Name = [System.String]'BeforeUseLabel'
 $BeforeUseLabel.Size = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]385,[System.Int32]39))
 $BeforeUseLabel.TabIndex = [System.Int32]19
-$BeforeUseLabel.Text = [System.String]'Before using this tool read the directions at the Github linked above!
-'
+$BeforeUseLabel.Text = [System.String]'Before using this tool read the directions at the Github linked above!'
 $BeforeUseLabel.TextAlign = [System.Drawing.ContentAlignment]::MiddleCenter
 $BeforeUseLabel.UseCompatibleTextRendering = $true
 #
@@ -244,7 +234,6 @@ $LauncherWindow.Controls.Add($ResetAppDataButton)
 $LauncherWindow.Controls.Add($PrivacyWarningLabel)
 $LauncherWindow.Controls.Add($SafetyLabel)
 $LauncherWindow.Controls.Add($CloseButton)
-$LauncherWindow.Controls.Add($VersionLabel)
 $LauncherWindow.Controls.Add($AboutMeLabel)
 $LauncherWindow.Controls.Add($ClickCheckboxLabel)
 $LauncherWindow.Controls.Add($UnofficialToolLabel)
@@ -257,7 +246,7 @@ $LauncherWindow.MinimizeBox = $false
 $LauncherWindow.MinimumSize = (New-Object -TypeName System.Drawing.Size -ArgumentList @([System.Int32]425,[System.Int32]450))
 $LauncherWindow.SizeGripStyle = [System.Windows.Forms.SizeGripStyle]::Hide
 $LauncherWindow.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen
-$LauncherWindow.Text = [System.String]'Scavengers Community Support Tool'
+$LauncherWindow.Text = [System.String]$version+'                      Scavengers Community Support Tool'
 $LauncherWindow.add_FormClosed($CloseButton_Click)
 $LauncherWindow.add_Load($LauncherWindow_Load)
 $LauncherWindow.ResumeLayout($false)
@@ -268,7 +257,6 @@ Add-Member -InputObject $LauncherWindow -Name AcceptCheckBox -Value $AcceptCheck
 Add-Member -InputObject $LauncherWindow -Name UnofficialToolLabel -Value $UnofficialToolLabel -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name ClickCheckboxLabel -Value $ClickCheckboxLabel -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name AboutMeLabel -Value $AboutMeLabel -MemberType NoteProperty
-Add-Member -InputObject $LauncherWindow -Name VersionLabel -Value $VersionLabel -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name CloseButton -Value $CloseButton -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name SafetyLabel -Value $SafetyLabel -MemberType NoteProperty
 Add-Member -InputObject $LauncherWindow -Name PrivacyWarningLabel -Value $PrivacyWarningLabel -MemberType NoteProperty
