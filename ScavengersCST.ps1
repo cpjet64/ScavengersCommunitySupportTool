@@ -112,9 +112,8 @@ function MSUpdate{
   Set-PSRepository PSGallery -InstallationPolicy Untrusted
   Set-Variable uploadtype "MSUpdates"
   Set-Variable logfiletoupload "$msupdatelog"
-  UploadtoDiscordSmallText -Wait
+  UploadDiscordText -Wait
 }
-
 function ResetNetwork{
   Write-Host "netsh winsock reset catalog"
   netsh winsock reset catalog
@@ -161,9 +160,9 @@ function CompressLogs{
   }
   Compress-Archive @compress
 }
-function UploadtoDiscordSmallText{
-#$Uri = $TestUri
-$Uri = $OfficialUri
+function UploadDiscordText{
+$Uri = $TestUri
+#$Uri = $OfficialUri
   $content = @"
 $discordusername Submitted this $uploadtype log file.
 "@
@@ -188,9 +187,10 @@ $discordusername Submitted this $uploadtype log file.
   $filePath = (Get-Item $logfiletoupload).FullName
   Submit-TextFile $filePath $Uri
 }
-function UploadtoDiscordZipped ($filePath, $Uri) {
+function UploadtoDiscordZip {
 $Uri = $TestUri
 #$Uri = $OfficialUri
+  function Submit-ZipFile ($filePath, $Uri) {
     $filename = (Get-ChildItem $filePath).Name
     $fileBytes = [System.IO.File]::ReadAllBytes($filePath)
     $filecontents = [System.Text.Encoding]::GetEncoding("ISO-8859-1").GetString($fileBytes)
@@ -207,11 +207,11 @@ $Uri = $TestUri
     }
     Invoke-RestMethod @params | ConvertTo-Json -Depth 99 | Set-Content sf.json
   }
-  $filePath = (Get-Item $zippedlogs).FullName
-  UploadtoDiscordZipped $filePath $Uri
+  $filePath = (Get-Item $logfiletoupload).FullName
+  Submit-ZipFile $filePath $Uri
 }
 function Cleanup{
-  $msgBox =  [System.Windows.MessageBox]::Show("Cleaning up files we download/created please wait until the tool fully closes. Press OK to continue.",'SCST','Ok','Exclamation')
+#  $msgBox =  [System.Windows.MessageBox]::Show("Cleaning up files we download/created please wait until the tool fully closes. Press OK to continue.",'SCST','Ok','Exclamation')
   if (Test-Path $scstinfo) {Remove-Item -Path "$scstinfo"}
   if (Test-Path $scstrepair) {Remove-Item -Path "$scstrepair"}
   if (Test-Path $scstdism) {Remove-Item -Path "$scstdism"}
@@ -236,7 +236,7 @@ function DataCollector{
   Write-Host "Now uploading system info to Discord"
   Set-Variable uploadtype "Info"
   Set-Variable logfiletoupload "$scstinfo"
-  UploadtoDiscordSmallText -Wait
+  UploadDiscordText -Wait
   Write-Host "Uploading system info to Discord finished"
   Write-Host "Data collection complete"
 }
@@ -281,7 +281,7 @@ function Repair{
   Set-Variable uploadtype "Repair"
   Set-Variable logfiletoupload "$scstrepair"
   Write-Host "Now collecting, compressing, and uploading our repair log files to Discord"
-  UploadtoDiscordSmallText -Wait
+  UploadDiscordText -Wait
   Write-Host "Uploading to Discord finished"
   Write-Host "Repair Process Finished."
   RestartComputer
