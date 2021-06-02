@@ -65,28 +65,28 @@ $sourcevcredisx64 = "https://aka.ms/vs/16/release/vc_redist.x64.exe"
 #Functions
 ###
 function FWWarningForm{
-  . (Join-Path $PSScriptRoot 'FWWarningForm.ps1')
-  . (Join-Path $PSScriptRoot 'FWWarningForm.designer.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'FWWarningForm.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'FWWarningForm.designer.ps1')
   $FWWarningForm.ShowDialog()
 }
 function MSUWaitWarningForm{
-  . (Join-Path $PSScriptRoot 'MSUWaitWarningForm.ps1')
-  . (Join-Path $PSScriptRoot 'MSUWaitWarningForm.designer.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'MSUWaitWarningForm.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'MSUWaitWarningForm.designer.ps1')
   $MSUWaitWarningForm.ShowDialog()
 }
 function DiscordUserNameEntryForm{
-  . (Join-Path $PSScriptRoot 'DiscordUNForm.ps1')
-  . (Join-Path $PSScriptRoot 'DiscordUNForm.designer.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'DiscordUNForm.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'DiscordUNForm.designer.ps1')
   $DiscordUNEntryForm.ShowDialog()
 }
 function NetWarningForm{
-  . (Join-Path $PSScriptRoot 'NetWarningForm.ps1')
-  . (Join-Path $PSScriptRoot 'NetWarningForm.designer.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'NetWarningForm.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'NetWarningForm.designer.ps1')
   $NetWarningForm.ShowDialog()
 }
 function RepairWaitWarningForm{
-  . (Join-Path $PSScriptRoot 'RepairWaitWarningForm.ps1')
-  . (Join-Path $PSScriptRoot 'RepairWaitWarningForm.designer.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'RepairWaitWarningForm.ps1')
+  . (Join-Path $PSScriptRoot\subforms 'RepairWaitWarningForm.designer.ps1')
   $RepairWaitWarningForm.ShowDialog()
 }
 function MSUpdate{
