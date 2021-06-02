@@ -161,8 +161,8 @@ function CompressLogs{
   Compress-Archive @compress
 }
 function UploadDiscordText{
-$Uri = $TestUri
-#$Uri = $OfficialUri
+#$Uri = $TestUri
+$Uri = $OfficialUri
   $content = @"
 $discordusername Submitted this $uploadtype log file.
 "@
@@ -188,8 +188,8 @@ $discordusername Submitted this $uploadtype log file.
   Submit-TextFile $filePath $Uri
 }
 function UploadtoDiscordZip {
-$Uri = $TestUri
-#$Uri = $OfficialUri
+#$Uri = $TestUri
+$Uri = $OfficialUri
   function Submit-ZipFile ($filePath, $Uri) {
     $filename = (Get-ChildItem $filePath).Name
     $fileBytes = [System.IO.File]::ReadAllBytes($filePath)
