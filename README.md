@@ -78,7 +78,7 @@ Download the latest release from https://github.com/cpjet64/ScavengersUE4Support
 ## Features ##
 
  There are currently six different uses for the tool. Microsoft Updates, Reset AppData, Reset Windows Firewall, Reset Network, Data Collector, and Repair.
- * **Microsoft Updates** button will download and install all available Microsoft Updates excluding Update Previews. This button does not transmit data to Discord.
+ * **Microsoft Updates** button will download and install all available Microsoft Updates excluding Update Previews and will gather what updates were installed and send it directly to the Official Scavengers Discord for the support team and developers to analyze.
  * **Reset AppData** button will rename the Scavenger folder located in your localappdata folder. This folder contains the graphics and game settings and cache for the game.  This button does not transmit data to Discord.
  * **Reset Windows Firewall** button will reset your Windows Firewall to the DEFAULT settings. This button does not transmit data to Discord.
  * **Reset Network** button will perform a full reset of your network adapters.  This button does not transmit data to Discord.
