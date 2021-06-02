@@ -5,7 +5,9 @@ $ResetWinFWButton_Click = {
   FWWarningForm
 }
 $MSUpdateButton_Click = {
-  MSUWaitWarningForm
+  if ($null = $discordusername) {}
+  else {DiscordUserNameEntryForm}
+  if ($null = $discordusername) {MSUWaitWarningForm}
 }
 $ResetNetButton_Click = {
   NetWarningForm
@@ -24,14 +26,12 @@ $RepairToolButton_Click = {
   if ($null = $discordusername) {}
   else {DiscordUserNameEntryForm}
   if ($null = $discordusername) {RepairWaitWarningForm}
-  else {DiscordUserNameEntryForm}
 }
 $DataCollectorButton_Click = {
   $DataCollectorButton.Enabled = $false
   if ($null = $discordusername) {}
   else {DiscordUserNameEntryForm}
   if ($null = $discordusername) {DataCollector}
-  else {DiscordUserNameEntryForm}
   $CloseButton.Enabled = $true
 }
 $AcceptCheckbox_CheckedChanged = {
