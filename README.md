@@ -158,7 +158,7 @@ DISM Tool Logfile - This tool collates the repair information from the custom DI
 
 ## License ##
 
-This project is under license GNU GPL3. For more details, see the [LICENSE](LICENSE.md) file.
+This project is under license GNU GPLv3. For more details, see the [LICENSE](LICENSE.md) file.
 
 <a href="#top">Return to Top</a>
 
